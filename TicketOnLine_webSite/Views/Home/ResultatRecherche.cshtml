@@ -1,0 +1,28 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model TicketOnLine_webSite.ViewModel.RechercheViewModel
+
+<p>Vue partielle : @DateTime.Now.ToLongTimeString()</p>
+<p>Resultat de la recherche</p>
+@if (Model.SearchResult.Count == 0)
+{
+    <p>Pas de résultat</p>
+}
+else
+{
+    <table>
+        <tr>
+            <th>Nom Spectacle</th>
+            <th>telephone</th>
+        </tr>
+        @foreach(var item in Model.SearchResult)
+        {
+            <tr>
+                <td>@item.NomSpectacle</td>
+                <td>@item.Realisateur</td>
+            </tr>
+        }
+    </table>
+}

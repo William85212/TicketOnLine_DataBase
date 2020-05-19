@@ -1,0 +1,33 @@
+﻿@model TicketOnLine_webSite.ViewModel.RechercheViewModel
+@{
+    ViewData["Title"] = "Ou";
+}
+{
+@using (Html.BeginForm("Ou", "Home", FormMethod.Get))
+{
+    @Html.TextBoxFor(m => m.Search);
+    <input type="submit" value="Rechercher" />
+
+    <p>Résultats de la recherche</p>
+    if (Model.SearchResult.Count == 0)
+    {
+        <p>Pas de résultat</p>
+    }
+    else
+    {
+        <table>
+            <tr>
+                <th>Nom Spectacle</th>
+                <th>Realisateur</th>
+            </tr>
+            @foreach (var item in Model.SearchResult)
+            {
+                <tr>
+                    <td>@item.NomSpectacle</td>
+                    <td>@item.Realisateur</td>
+                </tr>
+            }
+        </table>
+    }
+}
+
