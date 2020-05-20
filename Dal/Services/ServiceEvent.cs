@@ -44,14 +44,14 @@ namespace Dal.Services
         {
             using(SqlCommand cmd = _connection.CreateCommand())
             {
-                cmd.CommandText = "insert into Event output inserted.Id values ( @NomSpectacle, @Relisateur, @Description, @Duree, @Capacite, @PlaceRestante, @IdSalle)";
+                cmd.CommandText = "insert into Event output inserted.Id values ( @NomSpectacle, @Relisateur, @Description, @Duree, @PlaceRestante, @IdSalle, @Image)";
                 cmd.Parameters.AddWithValue("NomSpectacle", e.NomSpectacle);
                 cmd.Parameters.AddWithValue("Realisateur", e.Realisateur);
                 cmd.Parameters.AddWithValue("Description", e.Description);
                 cmd.Parameters.AddWithValue("Duree",e.Duree);
-                cmd.Parameters.AddWithValue("Capacite", e.Capacite);
                 cmd.Parameters.AddWithValue("PlaceRestante", e.PlaceRestante);
                 cmd.Parameters.AddWithValue("IdSalle", e.IdSalle);
+                cmd.Parameters.AddWithValue("Image", e.Image);
 
                 return (int)cmd.ExecuteScalar();
             }
@@ -91,9 +91,9 @@ namespace Dal.Services
                             Realisateur =(string)reader["Realisateur"],
                             Description =(string)reader["Description"],
                             Duree =(TimeSpan)reader["Duree"],
-                            Capacite =(int)reader["Capacite"],
                             PlaceRestante =(int)reader["PlaceRestante"],
-                            IdSalle =(int)reader["IdSalle"]
+                            IdSalle =(int)reader["IdSalle"],
+                            Image = (reader["Image"] is DBNull)? null : (string)reader["Image"]
                         });
                     }
                     return l;
@@ -118,9 +118,9 @@ namespace Dal.Services
                             Realisateur = (string)reader["Realisateur"],
                             Description = (string)reader["Description"],
                             Duree = (TimeSpan)reader["Duree"],
-                            Capacite = (int)reader["Capacite"],
                             PlaceRestante = (int)reader["PlaceRestante"],
-                            IdSalle = (int)reader["IdSalle"]
+                            IdSalle = (int)reader["IdSalle"],
+                            Image = (reader["Image"] is DBNull) ? null : (string)reader["Image"]
                         };
                     }
                     return null;
@@ -144,9 +144,9 @@ namespace Dal.Services
                             Realisateur = (string)reader["Ralisateur"],
                             Description = (string)reader["Description"],
                             Duree = (TimeSpan)reader["Duree"],
-                            Capacite = (int)reader["Capacite"],
                             PlaceRestante = (int)reader["PlaceRestance"],
-                            IdSalle = (int)reader["IdSalle"]
+                            IdSalle = (int)reader["IdSalle"],
+                            Image = (reader["Image"] is DBNull) ? null : (string)reader["Image"]
                         };
                     }
                     return null;
@@ -161,14 +161,15 @@ namespace Dal.Services
         {
             using(SqlCommand cmd = _connection.CreateCommand())
             {
-                cmd.CommandText = "update Event NomSpectacle = @NomSpectacle, Realisateur = @Realisateur, Description = @Description , Duree = @Duree, Capacite = @Capacite, PlaceRestante = @PlaceRestante, IdSalle = @IdSalle";
+                cmd.CommandText = "update Event NomSpectacle = @NomSpectacle, Realisateur = @Realisateur, Description = @Description , PlaceRestante = @PlaceRestante, IdSalle = @IdSalle, Image = @Image";
                 cmd.Parameters.AddWithValue("NomSpectecle", e.NomSpectacle);
                 cmd.Parameters.AddWithValue("Realisateur", e.Realisateur);
                 cmd.Parameters.AddWithValue("Description", e.Description);
                 cmd.Parameters.AddWithValue("Duree", e.Duree);
-                cmd.Parameters.AddWithValue("Capacite", e.Capacite);
                 cmd.Parameters.AddWithValue("PlaceRestante", e.PlaceRestante);
                 cmd.Parameters.AddWithValue("IdSalle",e.IdSalle);
+                cmd.Parameters.AddWithValue("Image",e.Image);
+
 
                 cmd.ExecuteNonQuery();
             }

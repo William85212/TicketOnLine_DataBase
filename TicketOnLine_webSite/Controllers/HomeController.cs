@@ -43,8 +43,7 @@ namespace TicketOnLine_webSite.Controllers
                                   select c).FirstOrDefault();
             if (ModelState.IsValid)
             {
-                if (clients.IsActive == true)
-                {
+                
                     if (clients is null)
                     {
                         ViewBag.ErrorInscription = "Veuillez vous inscrire avant de vous connecter!!";
@@ -75,8 +74,8 @@ namespace TicketOnLine_webSite.Controllers
                         
 
                     }
-                }
-                else return RedirectToAction("Post");
+                
+                
                 
             }
             return View(vm);
@@ -174,7 +173,7 @@ namespace TicketOnLine_webSite.Controllers
 
 
         #region Event 
-
+        
         public ActionResult GetEvent(int id)
         {
             return View(ServicesEvent.Get(id).Result);
@@ -184,7 +183,7 @@ namespace TicketOnLine_webSite.Controllers
             return View(ServicesEvent.Get().Result);
         }
 
-
+        [AccesAttribute]
         public ActionResult CreateEvent()
         {
             return View();
@@ -199,7 +198,7 @@ namespace TicketOnLine_webSite.Controllers
             }
             return View(web);
         }
-
+        [AccesAttribute]
         [HttpGet]
         private ActionResult UpdateEvent(int id)
         {
@@ -215,14 +214,14 @@ namespace TicketOnLine_webSite.Controllers
             return View();
         }
 
-
+        [AccesAttribute]
         public ActionResult DeleteEvent(int id)
         {
             ServicesEvent.Delete(id);
             return Redirect("GetAllEvent");
         }
 
-
+        [AccesAttribute]
         public ActionResult Ou(RechercheViewModel rechercheView)
         {
             if(!string.IsNullOrWhiteSpace(rechercheView.Search))
@@ -264,9 +263,9 @@ namespace TicketOnLine_webSite.Controllers
             return RedirectToAction("index");
         }
 
+        #region salle
 
 
-        
         public ActionResult AfficherSalle()
         {
             return View(ServicesSalle.Get().Result);
@@ -277,7 +276,7 @@ namespace TicketOnLine_webSite.Controllers
         {
             return View(ServicesSalle.Get().Result);
         }
-
+        #endregion
 
     }
 }

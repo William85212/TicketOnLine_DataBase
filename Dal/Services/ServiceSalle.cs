@@ -25,6 +25,7 @@ namespace Dal.Services
         protected ServiceSalle()
         {
             _connection = new SqlConnection(@"Data Source=DESKTOP-DLBID37\SQL2019DEV;Initial Catalog=dbtest;Integrated Security=True");
+            
             _connection.Open();
         }
 

@@ -18,9 +18,9 @@ namespace webApi.Utils
                 Realisateur = api.Realisateur,
                 Description = api.Description,
                 Duree =new TimeSpan( api.Duree),
-                Capacite = api.Capacite,
                 PlaceRestante = api.PlaceRestante,
-                IdSalle = api.IdSalle
+                IdSalle = api.IdSalle,
+                Image = api.Image
             };
             return e;
         }
@@ -33,9 +33,9 @@ namespace webApi.Utils
                 Realisateur = e.Realisateur,
                 Description = e.Description,
                 Duree = e.Duree.Ticks,
-                Capacite = e.Capacite,
                 PlaceRestante = e.PlaceRestante,
-                IdSalle = e.IdSalle
+                IdSalle = e.IdSalle,
+                Image= e.Image
             };
             return a; 
         }
