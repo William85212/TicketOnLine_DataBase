@@ -12,8 +12,8 @@ namespace TicketOnLine_webSite.Models
         public string Realisateur { get; set; }
         public string Description { get; set; }
         public long Duree { get; set; }
-        public int Capacite { get; set; }
         public int PlaceRestante { get; set; }
         public int IdSalle { get; set; }
+        public string Image { get; set; }
     }
 }

@@ -277,6 +277,15 @@ namespace TicketOnLine_webSite.Controllers
             return View(ServicesSalle.Get().Result);
         }
         #endregion
+        [AccesAttribute]
+        public ActionResult Reservation(int id)
+        {
+            return View();
+        }
 
+        public ActionResult Reservation2(int id)
+        {
+            return View();
+        }
     }
 }

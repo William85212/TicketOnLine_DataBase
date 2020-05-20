@@ -15,5 +15,6 @@ namespace webApi.Models
         public int PlaceRestante { get; set; }
         public int IdSalle { get; set; }
         public string Image { get; set; }
+        public int Prix { get; set; }
     }
 }

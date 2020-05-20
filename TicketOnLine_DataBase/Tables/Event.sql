@@ -8,5 +8,6 @@
     [PlaceRestante] INT NOT NULL, 
     [IdSalle] INT NOT NULL, 
     [Image] nvarchar(50),
+    [prix ] INT NOT NULL, 
     CONSTRAINT [FK_Event_Salle] FOREIGN KEY ([IdSalle]) REFERENCES [Salles]([Id])
 )

@@ -20,7 +20,8 @@ namespace webApi.Utils
                 Duree =new TimeSpan( api.Duree),
                 PlaceRestante = api.PlaceRestante,
                 IdSalle = api.IdSalle,
-                Image = api.Image
+                Image = api.Image,
+                Prix = api.Prix
             };
             return e;
         }
@@ -35,7 +36,8 @@ namespace webApi.Utils
                 Duree = e.Duree.Ticks,
                 PlaceRestante = e.PlaceRestante,
                 IdSalle = e.IdSalle,
-                Image= e.Image
+                Image= e.Image, 
+                Prix = e.Prix
             };
             return a; 
         }
