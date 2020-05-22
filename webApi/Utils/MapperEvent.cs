@@ -14,6 +14,7 @@ namespace webApi.Utils
         {
             Evenement e = new Evenement
             {
+                Id = api.Id,
                 NomSpectacle = api.NomSpectacle,
                 Realisateur = api.Realisateur,
                 Description = api.Description,
@@ -30,6 +31,7 @@ namespace webApi.Utils
         {
             EvenementApi a = new EvenementApi
             {
+                Id = e.Id,
                 NomSpectacle = e.NomSpectacle,
                 Realisateur = e.Realisateur,
                 Description = e.Description,
@@ -60,6 +62,45 @@ namespace webApi.Utils
                 a.Add(item.toApi());
             }
             return a;
+        }
+
+
+        public static DateEventApi toApi(this DateEvent de)
+        {
+            DateEventApi dea = new DateEventApi
+            {
+                DateRepresentation = de.DateRepresentation
+            };
+            return dea;
+        }
+        public static DateEvent tod(this DateEventApi de)
+        {
+            DateEvent dea = new DateEvent
+            {
+                DateRepresentation = de.DateRepresentation
+            };
+            return dea;
+        }
+
+        public static List<DateEventApi> lta(this List<DateEvent> de)
+        {
+            List<DateEventApi> dea = new List<DateEventApi>();
+
+            foreach (DateEvent item in de)
+            {
+                dea.Add(item.toApi());
+            }
+            return dea;
+        }
+        public static List<DateEvent> ltd(this List<DateEventApi> de)
+        {
+            List<DateEvent> dea = new List<DateEvent>();
+
+            foreach (DateEventApi item in de)
+            {
+                dea.Add(item.tod());
+            }
+            return dea;
         }
 
     }

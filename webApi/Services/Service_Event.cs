@@ -58,5 +58,10 @@ namespace webApi.Services
         {
             service.Update(entity.toDal());
         }
+
+        public List<DateEventApi> GetDate(int id)
+        {
+            return service.GetInfoEvent(id).lta();
+        }
     }
 }

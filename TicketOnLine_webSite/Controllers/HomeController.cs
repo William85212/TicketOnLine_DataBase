@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Diagnostics;
 using Microsoft.Extensions.Logging;
 using TicketOnLine_webSite.Infrastructure;
 using TicketOnLine_webSite.Models;
@@ -178,9 +180,18 @@ namespace TicketOnLine_webSite.Controllers
         {
             return View(ServicesEvent.Get(id).Result);
         }
+
+
+
         public ActionResult AllEvent()
         {
             return View(ServicesEvent.Get().Result);
+        }
+        public ActionResult AllEventS(EventWeb web)
+        {
+            List<DateEventWeb> l = ServicesEvent.GetDate(web.Id).Result;
+            return PartialView(l);
+
         }
 
         [AccesAttribute]
@@ -277,7 +288,7 @@ namespace TicketOnLine_webSite.Controllers
             return View(ServicesSalle.Get().Result);
         }
         #endregion
-        [AccesAttribute]
+        //[AccesAttribute]
         public ActionResult Reservation(int id)
         {
             return View();
@@ -286,6 +297,11 @@ namespace TicketOnLine_webSite.Controllers
         public ActionResult Reservation2(int id)
         {
             return View();
+        }
+
+        public ActionResult GetDate(int id)
+        {
+            return View(ServicesEvent.GetDate(id).Result);
         }
     }
 }

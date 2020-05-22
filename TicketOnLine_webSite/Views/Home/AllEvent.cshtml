@@ -22,17 +22,23 @@
     @foreach (var item in Model)
     {
     <div class="col-sm-6">
-        <div class="eventinfo">
-            <h3>@item.NomSpectacle</h3>
-            <img class="product-image img-fluid img-thumbnail" src="~/Images/ImageEvent/@item.Image" alt="image of @item.NomSpectacle" />
-            @*<button id="togg1">Cliquez-moi !</button>*@
-            <div id="d1"><p class="description">@item.Description</p></div>
+        <form asp-action="AllEventS">
+            <div class="eventinfo">
+                <h3>@item.NomSpectacle</h3>
+                <img class="product-image img-fluid img-thumbnail" src="~/Images/ImageEvent/@item.Image" alt="image of @item.NomSpectacle" />
+                @*<button id="togg1">Cliquez-moi !</button>*@
+                <div id="d1"><p class="description">@item.Description</p></div>
 
-        </div>
-        <div class="action">
-            <a class="btn btn-sm btn-danger order-button " asp-controller="Home" asp-action="Reservation" asp-route-id="@item.Id" title="Order @item.NomSpectacle">Réservation</a>
-        </div>
+            </div>
+            <div class="action">
+                <div class="form-group">
+                    <input type="submit" value="AllEventS" class="btn btn-primary" />
+                </div>
+                <div>
+                    @Html.RenderPartialAsync("AllEventS");
+                </div>
+            </div>
+        </form>
     </div>
-        
-    }
-</div>
+            }
+        </div>

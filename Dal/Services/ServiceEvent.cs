@@ -3,6 +3,8 @@ using Dal.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Dynamic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace Dal.Services
@@ -88,6 +90,7 @@ namespace Dal.Services
                     {
                         l.Add(new Evenement
                         {
+                            Id = (int)reader["Id"],
                             NomSpectacle =(string)reader["NomSpectacle"],
                             Realisateur =(string)reader["Realisateur"],
                             Description =(string)reader["Description"],
@@ -115,6 +118,7 @@ namespace Dal.Services
                     {
                         return new Evenement
                         {
+                            Id = (int)reader["Id"],
                             NomSpectacle = (string)reader["NomSpectacle"],
                             Realisateur = (string)reader["Realisateur"],
                             Description = (string)reader["Description"],
@@ -141,6 +145,7 @@ namespace Dal.Services
                     {
                         return new Evenement
                         {
+                            Id = (int)reader["Id"],
                             NomSpectacle = (string)reader["NomSpectacle"],
                             Realisateur = (string)reader["Ralisateur"],
                             Description = (string)reader["Description"],
@@ -160,7 +165,7 @@ namespace Dal.Services
 
         public void Update(Evenement e)
         {
-            using(SqlCommand cmd = _connection.CreateCommand())
+            using (SqlCommand cmd = _connection.CreateCommand())
             {
                 cmd.CommandText = "update Event NomSpectacle = @NomSpectacle, Realisateur = @Realisateur, Description = @Description , PlaceRestante = @PlaceRestante, IdSalle = @IdSalle, Image = @Image";
                 cmd.Parameters.AddWithValue("NomSpectecle", e.NomSpectacle);
@@ -168,11 +173,33 @@ namespace Dal.Services
                 cmd.Parameters.AddWithValue("Description", e.Description);
                 cmd.Parameters.AddWithValue("Duree", e.Duree);
                 cmd.Parameters.AddWithValue("PlaceRestante", e.PlaceRestante);
-                cmd.Parameters.AddWithValue("IdSalle",e.IdSalle);
-                cmd.Parameters.AddWithValue("Image",e.Image);
+                cmd.Parameters.AddWithValue("IdSalle", e.IdSalle);
+                cmd.Parameters.AddWithValue("Image", e.Image);
 
 
                 cmd.ExecuteNonQuery();
+            }
+        }
+
+        public List<DateEvent> GetInfoEvent(int id)
+        {
+            using (SqlCommand cmd = _connection.CreateCommand()) 
+            {
+                cmd.CommandText = "select d.date from Event e join DateEvent d on d.IdEvent = e.Id where e.Id = @id";
+                cmd.Parameters.AddWithValue("id", id);
+                List<DateEvent> lE = new List<DateEvent>();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        lE.Add(new DateEvent
+                        {
+                            DateRepresentation = (DateTime)reader["Date"]
+                        });
+                    }
+                    return lE;
+                }
             }
         }
     }

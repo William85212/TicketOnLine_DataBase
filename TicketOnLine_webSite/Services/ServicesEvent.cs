@@ -78,5 +78,17 @@ namespace TicketOnLine_webSite.Services
                 }
             }
         }
+
+
+        public static async Task<List<DateEventWeb>> GetDate(int id)
+        {
+            HttpClient _client = new HttpClient();
+            _client.BaseAddress = new Uri("https://localhost:44399/api/");
+
+            HttpResponseMessage message = await _client.GetAsync("Event/GetDate/" + id);
+            string json = message.Content.ReadAsStringAsync().Result;
+
+            return JsonConvert.DeserializeObject<List<DateEventWeb>>(json);
+        }
     }
 }

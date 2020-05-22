@@ -9,7 +9,7 @@ namespace webApi.Utils
 {
     public static class MapperReservation
     {
-        public static ReservationApi toApi(Reservation r)
+        public static ReservationApi toApi(this Reservation r)
         {
             ReservationApi api = new ReservationApi
             {
@@ -22,7 +22,7 @@ namespace webApi.Utils
             return api;
         }
 
-        public static Reservation ToD(ReservationApi api)
+        public static Reservation ToD(this ReservationApi api)
         {
             Reservation r = new Reservation
             {
@@ -35,6 +35,27 @@ namespace webApi.Utils
             return r;
         }
 
+        public static List<ReservationApi> lta(this List<Reservation> r)
+        {
+            List<ReservationApi> a = new List<ReservationApi>();
+
+            foreach (Reservation item in r)
+            {
+                a.Add(item.toApi());
+            }
+            return a;
+        }
+
+        public static List<Reservation> ltd(List<ReservationApi> a)
+        {
+            List<Reservation> d = new List<Reservation>();
+
+            foreach (ReservationApi item in a)
+            {
+                d.Add(item.ToD());
+            }
+            return d;
+        }
 
     }
 }

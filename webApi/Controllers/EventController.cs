@@ -47,10 +47,16 @@ namespace webApi.Controllers
         }
 
         [HttpDelete]
-       // [Route("api/client/{id:int}")]
+        // [Route("api/client/{id:int}")]
         public void Delete(int id)
         {
             service.Delete(id);
+        }
+
+        [HttpGet("GetDate/{id:int}")]
+        public List<DateEventApi> GetDate(int id)
+        {
+            return service.GetDate(id);
         }
     }
 }

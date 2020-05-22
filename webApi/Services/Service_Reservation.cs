@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using webApi.Models;
+using webApi.Utils;
 
 namespace webApi.Services
 {
@@ -12,7 +13,7 @@ namespace webApi.Services
     {
         private static Service_Reservation _instance;
 
-        public Service_Reservation Instance
+        public static Service_Reservation Instance
         {
             get
             {
@@ -21,12 +22,25 @@ namespace webApi.Services
             }
         }
 
+        private Service_Reservation()
+        {
+
+        }
         ServiceReservation service = ServiceReservation.Instance;  
 
 
         public int Create(ReservationApi api)
         {
-            return service.Create(api)
+            return service.Create(api.ToD());
+        }
+
+        public IEnumerable<ReservationApi> Get()
+        {
+            return service.Get().lta();
+        }
+        public ReservationApi Get(int id )
+        {
+            return service.Get(id).toApi();
         }
     }
 }

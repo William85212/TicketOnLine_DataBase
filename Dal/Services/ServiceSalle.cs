@@ -74,7 +74,7 @@ namespace Dal.Services
                             Nom = (reader["Nom"] is DBNull ) ? null : (string)reader["Nom"],
                             Lieux = (string)reader["Lieux"],
                             Capacite = (int)reader["Capcite"],
-                            Image = (reader["Image"] is DBNull)? null : (string)reader["Lieux"]
+                            Image = (reader["Image"] is DBNull)? null : (string)reader["Image"]
                         });
                     }
                     return l;
@@ -98,7 +98,7 @@ namespace Dal.Services
                             Nom = (reader["Nom"] is DBNull) ? null : (string)reader["Nom"],
                             Lieux = (string)reader["Lieux"],
                             Capacite = (int)reader["Capacite"],
-                            Image = (reader["Image"] is DBNull) ? null : (string)reader["Lieux"]
+                            Image = (reader["Image"] is DBNull) ? null : (string)reader["Image"]
                         };
                     }
                     else
