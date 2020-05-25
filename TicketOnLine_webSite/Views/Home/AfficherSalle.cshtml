@@ -6,9 +6,6 @@
 }
 
 
-
-<h4>AfficherSalle</h4>
-
 <div id="SallesWrapper" class="row">
     @foreach (var item in Model)
     {
@@ -16,11 +13,9 @@
         <div class="col-sm-6">
             <div class="SalleInfo">
                 <h3>@item.Nom</h3>
-                <img class="product-image img-fluid img-thumbnail" src="~/Images/Image/@item.Image" alt="Image of @item.Nom" />
-                <p>Nombre de place : @item.Capacite </p>
-            </div>
-            <div class="action">
-                <a class="btn btn-sm btn-danger ">Evenement </a>
+                <a asp-controller="Home" asp-action="GetEnventByIdSalle" asp-route-id="@item.Id" title="?">
+                    <img class="product-image img-fluid img-thumbnail" src="~/Images/Image/@item.Image" alt="Image of @item.Nom" />
+                </a>
             </div>
         </div>
     }

@@ -35,11 +35,13 @@ namespace Dal.Services
             using(SqlCommand cmd = _connection.CreateCommand())
             {
                 _connection.Open();
-                cmd.CommandText = "insert into Salles output inserted.Id values (@Nom, @Lieux, @Capacite, @Image";
+                cmd.CommandText = "insert into Salles output inserted.Id values (@Nom, @Lieux, @Capacite, @Image, @IdEvent, @IdDateEvent";
                 cmd.Parameters.AddWithValue("Nom", salle.Nom);
                 cmd.Parameters.AddWithValue("Lieux", salle.Lieux);
                 cmd.Parameters.AddWithValue("Capacite", salle.Capacite);
                 cmd.Parameters.AddWithValue("Image", salle.Image);
+                cmd.Parameters.AddWithValue("IdEvent", salle.IdEvent);
+                cmd.Parameters.AddWithValue("IdDateEvent", salle.IdDateEvent);
 
                 return (int)cmd.ExecuteScalar();
             }
@@ -71,6 +73,7 @@ namespace Dal.Services
                     {
                         l.Add(new Salles
                         {
+                            Id = (int)reader["Id"],
                             Nom = (reader["Nom"] is DBNull ) ? null : (string)reader["Nom"],
                             Lieux = (string)reader["Lieux"],
                             Capacite = (int)reader["Capcite"],
@@ -95,6 +98,7 @@ namespace Dal.Services
                     {
                         return new Salles
                         {
+                            Id = (int)reader["Id"],
                             Nom = (reader["Nom"] is DBNull) ? null : (string)reader["Nom"],
                             Lieux = (string)reader["Lieux"],
                             Capacite = (int)reader["Capacite"],
@@ -112,11 +116,13 @@ namespace Dal.Services
             using (SqlCommand cmd = _connection.CreateCommand())
             {
                 _connection.Open();
-                cmd.CommandText = "update Salles Nom = @Nom, Lieux = @Lieux, Capacite = @Capacite, Image = @Image";
+                cmd.CommandText = "update Salles Nom = @Nom, Lieux = @Lieux, Capacite = @Capacite, Image = @Image, @IdEvent = IdEvent, @IdDateEvent = IdDateEvent";
                 cmd.Parameters.AddWithValue("Nom", salle.Nom);
                 cmd.Parameters.AddWithValue("Lieux", salle.Lieux);
                 cmd.Parameters.AddWithValue("Capacite", salle.Capacite);
                 cmd.Parameters.AddWithValue("Image", salle.Image);
+                cmd.Parameters.AddWithValue("IdEvent", salle.IdEvent);
+                cmd.Parameters.AddWithValue("IdDateEvent", salle.IdDateEvent);
 
                 cmd.ExecuteNonQuery();
 

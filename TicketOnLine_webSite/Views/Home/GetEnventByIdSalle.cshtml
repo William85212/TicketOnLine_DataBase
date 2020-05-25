@@ -1,0 +1,26 @@
+﻿@model IEnumerable<TicketOnLine_webSite.Models.EventWeb>
+<div class="text-capitalize, text-center">
+    <h3>Evenement à venir</h3>
+</div>
+<div class="row" id="listeEvent">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-6">
+
+            <form asp-action="AllEvent">
+                <div class="eventinfo">
+                    <div class="form-group">
+                        <h3>@item.NomSpectacle</h3>
+                        <img class="product-image img-fluid img-thumbnail" src="~/Images/ImageEvent/@item.Image" alt="image of @item.NomSpectacle" />
+                        @*<button id="togg1">Cliquez-moi !</button>*@
+                        <div id="d1"><p class="description">@item.Description</p></div>
+
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Reservation" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    }
+</div>

@@ -13,6 +13,7 @@ namespace webApi.Utils
         {
             SalleApi api = new SalleApi
             {
+                Id = s.Id,
                 Nom = s.Nom,
                 Lieux = s.Lieux,
                 Capacite = s.Capacite,
@@ -26,6 +27,7 @@ namespace webApi.Utils
         {
             Salles s = new Salles
             {
+                Id = api.Id,
                 Nom = api.Nom,
                 Lieux = api.Lieux,
                 Capacite = api.Capacite,

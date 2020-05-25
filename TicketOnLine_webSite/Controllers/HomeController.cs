@@ -180,18 +180,34 @@ namespace TicketOnLine_webSite.Controllers
         {
             return View(ServicesEvent.Get(id).Result);
         }
-
-
-
         public ActionResult AllEvent()
         {
             return View(ServicesEvent.Get().Result);
+            
         }
-        public ActionResult AllEventS(EventWeb web)
-        {
-            List<DateEventWeb> l = ServicesEvent.GetDate(web.Id).Result;
-            return PartialView(l);
+        //[HttpGet]
+        //public ActionResult AllEvent(EventWeb web)
+        //{
+        //    List<DateEventWeb> l = ServicesEvent.GetDate(web.Id).Result;
+        //    return PartialView(l);
 
+        //}
+
+        public ActionResult DetailsEvent(int id)
+        {
+            return View(ServicesEvent.Get(id).Result);
+        }
+
+
+        public ActionResult DetailsEvent2(int id)   //test : mise en place de la vue de detail avec html float!!
+        {
+            return View(ServicesEvent.Get(id).Result);
+        }
+
+
+        public ActionResult GetEnventByIdSalle(int id)
+        {
+            return View(ServicesEvent.GetEventByIdSalle(id).Result);
         }
 
         [AccesAttribute]
@@ -288,7 +304,7 @@ namespace TicketOnLine_webSite.Controllers
             return View(ServicesSalle.Get().Result);
         }
         #endregion
-        //[AccesAttribute]
+        [AccesAttribute]
         public ActionResult Reservation(int id)
         {
             return View();

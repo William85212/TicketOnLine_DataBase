@@ -1,0 +1,39 @@
+﻿@model TicketOnLine_webSite.Models.EventWeb
+@{
+    ViewData["Title"] = "DetailsEvent2";
+}
+
+<style>
+    .left {
+        float: left;
+    }
+
+    .right {
+        float: right;
+    }
+
+    .clear {
+        clear: both;
+    }
+
+    .yellow {
+        border: solid 1px black;
+        width: 25%;
+        height: 25%;
+    }
+    .des{
+        height:50%;
+        width:75%;
+        font-size: 60px;
+        background-color: blue;
+        display: block;
+    }
+</style>
+
+<div class="left yellow">
+    <img class="product-image img-fluid img-thumbnail" src="~/Images/ImageEvent/@Html.DisplayFor(model => model.Image)" alt="image of @Html.DisplayNameFor(model => model.NomSpectacle)" />
+</div>
+
+<div class="clear des">
+    <p>@Html.DisplayFor(model => model.Description)</p>
+</div>

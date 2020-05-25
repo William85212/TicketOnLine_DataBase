@@ -2,10 +2,46 @@
 @{
     ViewData["Title"] = "AllEvent";
 }
-    @*<script>
-    let togg1 = document.getElementById("togg1");
-    let d1 = document.getElementById("d1");
+<style>
+    #d1 {
+        background-color: #EECC4499;
+    }
 
+    #d2 {
+        background-color: #44EEAA99;
+    }
+</style>
+
+<div class="text-capitalize, text-center">
+    <h3>Agenda</h3>
+</div>
+
+
+<div class="row" id="listeEvent">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-6">
+            <div class="eventinfo">
+                <div class="form-group">
+                    <h3>@item.NomSpectacle</h3>
+                    <a asp-controller="Home" asp-action="DetailsEvent" asp-route-id="@item.Id" title="?">
+                        <img class="product-image img-fluid img-thumbnail" src="~/Images/ImageEvent/@item.Image" alt="image of @item.NomSpectacle" />
+                    </a>
+                    @*<button class="togg1">Cliquez-moi !</button>
+                    <div class="d1"><p class="description">@item.Description</p></div>*@
+                </div>
+            </div>
+        </div>
+
+
+
+    }
+</div>
+
+
+@*<script>
+    let togg1 = document.getElementByClassName("togg1");
+    let d1 = document.getElementByClassName("d1");
     togg1.addEventListener("click", () => {
         if (getComputedStyle(d1).display != "none") {
             d1.style.display = "none";
@@ -13,32 +49,4 @@
             d1.style.display = "block";
         }
     })
-    </script>*@
-
-<div class="text-capitalize, text-center">
-    <h3>Evenement à venir</h3>
-</div>
-<div class="row" id="listeEvent">
-    @foreach (var item in Model)
-    {
-    <div class="col-sm-6">
-        <form asp-action="AllEventS">
-            <div class="eventinfo">
-                <h3>@item.NomSpectacle</h3>
-                <img class="product-image img-fluid img-thumbnail" src="~/Images/ImageEvent/@item.Image" alt="image of @item.NomSpectacle" />
-                @*<button id="togg1">Cliquez-moi !</button>*@
-                <div id="d1"><p class="description">@item.Description</p></div>
-
-            </div>
-            <div class="action">
-                <div class="form-group">
-                    <input type="submit" value="AllEventS" class="btn btn-primary" />
-                </div>
-                <div>
-                    @Html.RenderPartialAsync("AllEventS");
-                </div>
-            </div>
-        </form>
-    </div>
-            }
-        </div>
+</script>*@

@@ -90,5 +90,16 @@ namespace TicketOnLine_webSite.Services
 
             return JsonConvert.DeserializeObject<List<DateEventWeb>>(json);
         }
+
+        public static async Task<List<EventWeb>> GetEventByIdSalle(int id)
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:44399/api/");
+
+            HttpResponseMessage message = await client.GetAsync("Event/GetEventByIdSalle/" + id);
+            string json = message.Content.ReadAsStringAsync().Result;
+
+            return JsonConvert.DeserializeObject<List<EventWeb>>(json);
+        }
     }
 }

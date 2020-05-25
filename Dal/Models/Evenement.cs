@@ -12,7 +12,6 @@ namespace Dal.Models
         public string Description { get; set; }
         public TimeSpan Duree { get; set; }
         public int PlaceRestante { get; set; }
-        public int IdSalle { get; set; }
         public string Image { get; set; }
         public int Prix { get; set; }
     }

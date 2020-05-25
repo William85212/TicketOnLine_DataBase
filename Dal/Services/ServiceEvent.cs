@@ -52,7 +52,6 @@ namespace Dal.Services
                 cmd.Parameters.AddWithValue("Description", e.Description);
                 cmd.Parameters.AddWithValue("Duree",e.Duree);
                 cmd.Parameters.AddWithValue("PlaceRestante", e.PlaceRestante);
-                cmd.Parameters.AddWithValue("IdSalle", e.IdSalle);
                 cmd.Parameters.AddWithValue("Image", e.Image);
                 cmd.Parameters.AddWithValue("Prix", e.Prix);
 
@@ -96,7 +95,6 @@ namespace Dal.Services
                             Description =(string)reader["Description"],
                             Duree =(TimeSpan)reader["Duree"],
                             PlaceRestante =(int)reader["PlaceRestante"],
-                            IdSalle =(int)reader["IdSalle"],
                             Image = (reader["Image"] is DBNull)? null : (string)reader["Image"]
                         });
                     }
@@ -124,7 +122,6 @@ namespace Dal.Services
                             Description = (string)reader["Description"],
                             Duree = (TimeSpan)reader["Duree"],
                             PlaceRestante = (int)reader["PlaceRestante"],
-                            IdSalle = (int)reader["IdSalle"],
                             Image = (reader["Image"] is DBNull) ? null : (string)reader["Image"]
                         };
                     }
@@ -151,7 +148,6 @@ namespace Dal.Services
                             Description = (string)reader["Description"],
                             Duree = (TimeSpan)reader["Duree"],
                             PlaceRestante = (int)reader["PlaceRestance"],
-                            IdSalle = (int)reader["IdSalle"],
                             Image = (reader["Image"] is DBNull) ? null : (string)reader["Image"]
                         };
                     }
@@ -173,7 +169,6 @@ namespace Dal.Services
                 cmd.Parameters.AddWithValue("Description", e.Description);
                 cmd.Parameters.AddWithValue("Duree", e.Duree);
                 cmd.Parameters.AddWithValue("PlaceRestante", e.PlaceRestante);
-                cmd.Parameters.AddWithValue("IdSalle", e.IdSalle);
                 cmd.Parameters.AddWithValue("Image", e.Image);
 
 
@@ -181,7 +176,7 @@ namespace Dal.Services
             }
         }
 
-        public List<DateEvent> GetInfoEvent(int id)
+        public List<DateEvent> GetInfoEvent(int id)//date
         {
             using (SqlCommand cmd = _connection.CreateCommand()) 
             {
@@ -199,6 +194,36 @@ namespace Dal.Services
                         });
                     }
                     return lE;
+                }
+            }
+        }
+
+
+        public List<Evenement> GetEventByIdSalle(int id)
+        {
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                cmd.CommandText = "select * from Event where IdSalle = @id";
+                cmd.Parameters.AddWithValue("id", id);
+                List<Evenement> Le = new List<Evenement>();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Le.Add(new Evenement
+                        {
+                            Id = (int)reader["Id"],
+                            NomSpectacle = (string)reader["NomSpectacle"],
+                            Realisateur = (string)reader["Realisateur"],
+                            Description = (string)reader["Description"],
+                            Duree = (TimeSpan)reader["Duree"],
+                            PlaceRestante = (int)reader["PlaceRestante"],
+                            Image = (reader["Image"] is DBNull) ? null : (string)reader["Image"],
+                            //Prix = (int)reader["prix"]
+                        });
+                    }
+                    return Le;
                 }
             }
         }

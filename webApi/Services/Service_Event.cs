@@ -63,5 +63,10 @@ namespace webApi.Services
         {
             return service.GetInfoEvent(id).lta();
         }
+
+        public List<EvenementApi> GetEventByIdSalle(int id)
+        {
+            return service.GetEventByIdSalle(id).LtoA();
+        }
     }
 }
