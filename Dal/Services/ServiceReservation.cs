@@ -24,7 +24,7 @@ namespace Dal.Services
 
         protected ServiceReservation()
         {
-            _connection = new SqlConnection(@"Data Source=DESKTOP-DLBID37\SQL2019DEV;Initial Catalog=dbtest;Integrated Security=True");
+            _connection = new SqlConnection(@"Data Source=DESKTOP-DLBID37\SQL2019DEV;Initial Catalog=db3;Integrated Security=True");
             _connection.Open();
         }
 #endregion

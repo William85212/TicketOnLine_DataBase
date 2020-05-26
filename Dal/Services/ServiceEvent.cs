@@ -34,7 +34,7 @@ namespace Dal.Services
 
         protected ServiceEvent()
         {
-            _connection = new SqlConnection(@"Data Source=DESKTOP-DLBID37\SQL2019DEV;Initial Catalog=dbtest;Integrated Security=True");
+            _connection = new SqlConnection(@"Data Source=DESKTOP-DLBID37\SQL2019DEV;Initial Catalog=db3;Integrated Security=True");
             _connection.Open();
         }
 
@@ -95,7 +95,8 @@ namespace Dal.Services
                             Description =(string)reader["Description"],
                             Duree =(TimeSpan)reader["Duree"],
                             PlaceRestante =(int)reader["PlaceRestante"],
-                            Image = (reader["Image"] is DBNull)? null : (string)reader["Image"]
+                            Image = (reader["Image"] is DBNull)? null : (string)reader["Image"],
+                           // Prix = (int)reader["prix"]
                         });
                     }
                     return l;
@@ -122,7 +123,8 @@ namespace Dal.Services
                             Description = (string)reader["Description"],
                             Duree = (TimeSpan)reader["Duree"],
                             PlaceRestante = (int)reader["PlaceRestante"],
-                            Image = (reader["Image"] is DBNull) ? null : (string)reader["Image"]
+                            Image = (reader["Image"] is DBNull) ? null : (string)reader["Image"],
+                            //Prix = (int)reader["prix"]
                         };
                     }
                     return null;
@@ -148,7 +150,8 @@ namespace Dal.Services
                             Description = (string)reader["Description"],
                             Duree = (TimeSpan)reader["Duree"],
                             PlaceRestante = (int)reader["PlaceRestance"],
-                            Image = (reader["Image"] is DBNull) ? null : (string)reader["Image"]
+                            Image = (reader["Image"] is DBNull) ? null : (string)reader["Image"],
+                            Prix = (int)reader["prix"]
                         };
                     }
                     return null;
@@ -170,6 +173,7 @@ namespace Dal.Services
                 cmd.Parameters.AddWithValue("Duree", e.Duree);
                 cmd.Parameters.AddWithValue("PlaceRestante", e.PlaceRestante);
                 cmd.Parameters.AddWithValue("Image", e.Image);
+
 
 
                 cmd.ExecuteNonQuery();
@@ -203,7 +207,7 @@ namespace Dal.Services
         {
             using (SqlCommand cmd = _connection.CreateCommand())
             {
-                cmd.CommandText = "select * from Event where IdSalle = @id";
+                cmd.CommandText = "select e.* from Event e join DateEvent de on e.Id = de.IdEvent where de.IdSalle = 1";
                 cmd.Parameters.AddWithValue("id", id);
                 List<Evenement> Le = new List<Evenement>();
 

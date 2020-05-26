@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TicketOnLine_webSite.Hubs;
 using TicketOnLine_webSite.Infrastructure;
 using TicketOnLine_webSite.Utils;
 
@@ -41,6 +42,7 @@ namespace TicketOnLine_webSite
             services.AddHttpContextAccessor();//va permettre de l avoir en injection de pépendance dans les session TOOls
             services.AddTransient<ISessionTools, SessionTools>();
             services.AddSingleton<IHascMdp, HascMdp>();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +70,7 @@ namespace TicketOnLine_webSite
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHub<ChatHub>("/chatHub");
             });
         }
     }

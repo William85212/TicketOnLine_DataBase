@@ -24,7 +24,7 @@ namespace Dal.Services
 
         protected ServiceSalle()
         {
-            _connection = new SqlConnection(@"Data Source=DESKTOP-DLBID37\SQL2019DEV;Initial Catalog=dbtest;Integrated Security=True");
+            _connection = new SqlConnection(@"Data Source=DESKTOP-DLBID37\SQL2019DEV;Initial Catalog=db3;Integrated Security=True");
             
             _connection.Open();
         }
@@ -40,8 +40,7 @@ namespace Dal.Services
                 cmd.Parameters.AddWithValue("Lieux", salle.Lieux);
                 cmd.Parameters.AddWithValue("Capacite", salle.Capacite);
                 cmd.Parameters.AddWithValue("Image", salle.Image);
-                cmd.Parameters.AddWithValue("IdEvent", salle.IdEvent);
-                cmd.Parameters.AddWithValue("IdDateEvent", salle.IdDateEvent);
+
 
                 return (int)cmd.ExecuteScalar();
             }
@@ -121,8 +120,7 @@ namespace Dal.Services
                 cmd.Parameters.AddWithValue("Lieux", salle.Lieux);
                 cmd.Parameters.AddWithValue("Capacite", salle.Capacite);
                 cmd.Parameters.AddWithValue("Image", salle.Image);
-                cmd.Parameters.AddWithValue("IdEvent", salle.IdEvent);
-                cmd.Parameters.AddWithValue("IdDateEvent", salle.IdDateEvent);
+
 
                 cmd.ExecuteNonQuery();
 

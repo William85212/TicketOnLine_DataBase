@@ -23,8 +23,9 @@
         <div class="col-sm-6">
             <div class="eventinfo">
                 <div class="form-group">
-                    <h3>@item.NomSpectacle</h3>
-                    <a asp-controller="Home" asp-action="DetailsEvent" asp-route-id="@item.Id" title="?">
+                    
+                    <a asp-controller="Home" asp-action="DetailsEvent2" asp-route-id="@item.Id" title="Réservation">
+                        <h3>@item.NomSpectacle</h3>
                         <img class="product-image img-fluid img-thumbnail" src="~/Images/ImageEvent/@item.Image" alt="image of @item.NomSpectacle" />
                     </a>
                     @*<button class="togg1">Cliquez-moi !</button>

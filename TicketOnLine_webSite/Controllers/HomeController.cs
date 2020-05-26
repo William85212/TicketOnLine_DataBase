@@ -72,7 +72,7 @@ namespace TicketOnLine_webSite.Controllers
                             _sessionTools.IsAdmin = true;
                         }
 
-                        return RedirectToAction("GetAction");
+                        return RedirectToAction("Index");
                         
 
                     }
@@ -192,13 +192,13 @@ namespace TicketOnLine_webSite.Controllers
         //    return PartialView(l);
 
         //}
-
+        [AccesAttribute]
         public ActionResult DetailsEvent(int id)
         {
             return View(ServicesEvent.Get(id).Result);
         }
 
-
+        [AccesAttribute]
         public ActionResult DetailsEvent2(int id)   //test : mise en place de la vue de detail avec html float!!
         {
             return View(ServicesEvent.Get(id).Result);
@@ -305,12 +305,12 @@ namespace TicketOnLine_webSite.Controllers
         }
         #endregion
         [AccesAttribute]
-        public ActionResult Reservation(int id)
+        public ActionResult Reservation()
         {
             return View();
         }
 
-        public ActionResult Reservation2(int id)
+        public ActionResult Reservation2()
         {
             return View();
         }

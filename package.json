@@ -1,0 +1,24 @@
+{
+  "name": "TicketOnLine_DataBase",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "jquery-ajax-unobtrusive": "^3.2.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/William85212/TicketOnLine_DataBase.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/William85212/TicketOnLine_DataBase/issues"
+  },
+  "homepage": "https://github.com/William85212/TicketOnLine_DataBase#readme"
+}
