@@ -59,10 +59,18 @@ namespace webApi.Controllers
             return service.GetDate(id);
         }
 
+        [HttpGet("GetInfoReservation/{id:int}")]
+        public List<infoReservationApi> GetInfoReservation(int id)
+        {
+            return service.GetInfoReservation(id);
+        }
+
         [HttpGet("GetEventByIdSalle/{id:int}")]
         public List<EvenementApi> GetEventByIdSalle(int id)
         {
             return service.GetEventByIdSalle(id);
         }
+
+
     }
 }

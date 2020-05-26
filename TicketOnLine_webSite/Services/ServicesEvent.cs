@@ -91,7 +91,18 @@ namespace TicketOnLine_webSite.Services
             return JsonConvert.DeserializeObject<List<DateEventWeb>>(json);
         }
 
-        public static async Task<List<EventWeb>> GetEventByIdSalle(int id)
+        public static async Task<List<infoReservationWeb>> GetInfoReservation(int id)
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:44399/api/");
+
+            HttpResponseMessage message = await client.GetAsync("Event/GetInfoReservation/" + id);
+            string json = message.Content.ReadAsStringAsync().Result;
+
+            return JsonConvert.DeserializeObject<List<infoReservationWeb>>(json);
+        }
+
+        public static async Task<List<EventWeb>> GetEventByIdSalle(int id)//??? verifier le probleme d affichage d event par salle de spectacle  
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("https://localhost:44399/api/");

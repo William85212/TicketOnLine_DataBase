@@ -63,6 +63,10 @@ namespace webApi.Services
         {
             return service.GetInfoEvent(id).lta();
         }
+        public List<infoReservationApi> GetInfoReservation(int id)
+        {
+            return service.GetInfoReservation(id).toApi();
+        }
 
         public List<EvenementApi> GetEventByIdSalle(int id)
         {

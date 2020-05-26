@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Dal.Models
+namespace webApi.Models
 {
-    public class infoReservation
+    public class infoReservationApi
     {
         public DateTime DateRepresentetion { get; set; }
         public string NomEvent { get; set; }
-
     }
 }

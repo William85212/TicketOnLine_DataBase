@@ -319,5 +319,10 @@ namespace TicketOnLine_webSite.Controllers
         {
             return View(ServicesEvent.GetDate(id).Result);
         }
+
+        public ActionResult GetInfoReservation(int id)
+        {
+            return View(ServicesEvent.GetInfoReservation(id).Result);
+        }
     }
 }

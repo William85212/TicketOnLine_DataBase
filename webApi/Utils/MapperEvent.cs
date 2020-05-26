@@ -101,5 +101,27 @@ namespace webApi.Utils
             return dea;
         }
 
+
+        public static infoReservationApi toapi(this infoReservation d)
+        {
+            infoReservationApi a = new infoReservationApi
+            {
+                DateRepresentetion = d.DateRepresentetion,
+                NomEvent = d.NomEvent
+            };
+            return a;
+        }
+
+        public static List<infoReservationApi> toApi(this List<infoReservation> r)
+        {
+            List<infoReservationApi> a = new List<infoReservationApi>();
+
+            foreach (infoReservation item in r)
+            {
+                a.Add(item.toapi());
+            }
+            return a;
+        }
+
     }
 }

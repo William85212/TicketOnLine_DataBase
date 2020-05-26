@@ -3,6 +3,7 @@ using Dal.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Dynamic;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -201,6 +202,31 @@ namespace Dal.Services
                 }
             }
         }
+
+        public List<infoReservation> GetInfoReservation(int id)
+        {
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                cmd.CommandText = "select de.date, s.Nom from Event e join DateEvent de on de.IdEvent = e.Id join Salles s on s.Id = de.IdSalle where e.Id = @id";
+                cmd.Parameters.AddWithValue("id", id);
+
+                List<infoReservation> lir = new List<infoReservation>();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        lir.Add(new infoReservation
+                        {
+                            DateRepresentetion = (DateTime)reader["date"],
+                            NomEvent = (string)reader["Nom"]
+                        });
+                    }
+                    return lir;
+                }
+            }
+        }
+    
 
 
         public List<Evenement> GetEventByIdSalle(int id)
