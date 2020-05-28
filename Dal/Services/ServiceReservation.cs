@@ -33,12 +33,12 @@ namespace Dal.Services
         {
             using (SqlCommand cmd = _connection.CreateCommand() )
             {
-                cmd.CommandText = "insert into Reservation output inserted.Id (@Date, @NbrPlace, @IdClient, @IdEvent, @PrixPlace)";
+                cmd.CommandText = "insert into Reservation output inserted.Id values (@Date, @NbrPlace, @Idclient, @IdEvent, @prixPlace)";
                 cmd.Parameters.AddWithValue("Date", reservation.Date);
                 cmd.Parameters.AddWithValue("NbrPlace", reservation.NbrPlace);
-                cmd.Parameters.AddWithValue("IdClient", reservation.IdClient);
+                cmd.Parameters.AddWithValue("Idclient", reservation.IdClient);
                 cmd.Parameters.AddWithValue("IdEvent", reservation.IdEvent);
-                cmd.Parameters.AddWithValue("PrixPlace", reservation.PrixPlace);
+                cmd.Parameters.AddWithValue("prixPlace", reservation.PrixPlace);
 
                 return (int)cmd.ExecuteScalar();
             }

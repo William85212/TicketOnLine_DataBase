@@ -62,6 +62,30 @@ namespace TicketOnLine_webSite.Infrastructure
             }
         }
 
+        public EventWeb eventWeb
+        {
+            get
+            {
+                return Session.Keys.Contains(nameof(eventWeb)) ? JsonConvert.DeserializeObject<EventWeb>(Session.GetString(nameof(eventWeb))) : null;
+            }
+            set
+            {
+                Session.SetString(nameof(eventWeb), JsonConvert.SerializeObject(value));
+            }
+        }
+
+        public DateTime? DateEvent
+        {
+            get
+            {
+                return Session.Keys.Contains(nameof(DateEvent)) ? JsonConvert.DeserializeObject<DateTime?>(Session.GetString(nameof(DateEvent))) : null;
+            }
+            set
+            {
+                Session.SetString(nameof(DateEvent), JsonConvert.SerializeObject(value));
+            }
+        }
+
         //pour Stocker la liste des Billets Reserver
 
         //public List<ReservationWeb> Reservation

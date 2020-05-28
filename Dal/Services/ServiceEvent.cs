@@ -96,8 +96,8 @@ namespace Dal.Services
                             Description =(string)reader["Description"],
                             Duree =(TimeSpan)reader["Duree"],
                             PlaceRestante =(int)reader["PlaceRestante"],
+                            Prix =(int)reader["prix "],
                             Image = (reader["Image"] is DBNull)? null : (string)reader["Image"],
-                           // Prix = (int)reader["prix"]
                         });
                     }
                     return l;
@@ -125,7 +125,7 @@ namespace Dal.Services
                             Duree = (TimeSpan)reader["Duree"],
                             PlaceRestante = (int)reader["PlaceRestante"],
                             Image = (reader["Image"] is DBNull) ? null : (string)reader["Image"],
-                            //Prix = (int)reader["prix"]
+                            Prix = (int)reader["prix "]
                         };
                     }
                     return null;
@@ -152,7 +152,7 @@ namespace Dal.Services
                             Duree = (TimeSpan)reader["Duree"],
                             PlaceRestante = (int)reader["PlaceRestance"],
                             Image = (reader["Image"] is DBNull) ? null : (string)reader["Image"],
-                            Prix = (int)reader["prix"]
+                            Prix = (int)reader["prix "]
                         };
                     }
                     return null;
@@ -233,7 +233,7 @@ namespace Dal.Services
         {
             using (SqlCommand cmd = _connection.CreateCommand())
             {
-                cmd.CommandText = "select e.* from Event e join DateEvent de on e.Id = de.IdEvent where de.IdSalle = 1";
+                cmd.CommandText = "select e.* from Event e join DateEvent de on e.Id = de.IdEvent where de.IdSalle = @id";
                 cmd.Parameters.AddWithValue("id", id);
                 List<Evenement> Le = new List<Evenement>();
 
@@ -250,7 +250,7 @@ namespace Dal.Services
                             Duree = (TimeSpan)reader["Duree"],
                             PlaceRestante = (int)reader["PlaceRestante"],
                             Image = (reader["Image"] is DBNull) ? null : (string)reader["Image"],
-                            //Prix = (int)reader["prix"]
+                            Prix = (int)reader["prix "]
                         });
                     }
                     return Le;

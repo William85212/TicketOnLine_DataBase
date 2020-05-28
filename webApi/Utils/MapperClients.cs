@@ -13,6 +13,7 @@ namespace webApi.Utils
         {
             ClientsApi api = new ClientsApi
             {
+                Id = c.Id,
                 Nom = c.Nom,
                 Prenom = c.Prenom,
                 DateNaisance = c.DateNaisance,
@@ -30,6 +31,7 @@ namespace webApi.Utils
         {
             Clients c = new Clients
             {
+                Id = api.Id,
                 Nom = api.Nom,
                 Prenom = api.Prenom,
                 DateNaisance = api.DateNaisance,

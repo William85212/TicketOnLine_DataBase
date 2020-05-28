@@ -11,11 +11,17 @@
             <p>Reservation</p>
             <p>Durée du spectacle : @Html.DisplayFor(model => model.Duree)</p>
             <p>Nombre de place disponible : @Html.DisplayFor(model => model.PlaceRestante)</p>
-            <p>Prix : propbleme avec la dalle !!!</p>
-            <button class="btn btn-danger btn-group-toggle" asp-controller="home" asp-action="Reservation2">Réserver</button>
-            @Html.ActionLink("reserver", "Reservation2", "home");
+            <p>@Html.DisplayFor(model => model.Id)</p>
+            <p>Prix : @Model.Prix</p>
+
+
+            @Html.ActionLink("reservation", "GetInfoReservation", "Home", new { id = Model.Id })
+
+            <a asp-controller="Home" asp-action="GetInfoReservation" asp-route-id="@Model.Id">
+                <button class="btn order-button" asp-action="Index" asp-controller="Home">reservation</button>
+            </a>
         </div>
-    </div>
+    </div>  
     <div class="row">
         <div class="col-sm-6">
             <p>@Html.DisplayFor(model => model.Description)</p>
@@ -54,7 +60,8 @@
     </div>
 
 
-    
+
+
 
 
 

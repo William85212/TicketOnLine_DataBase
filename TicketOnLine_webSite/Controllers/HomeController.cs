@@ -66,6 +66,7 @@ namespace TicketOnLine_webSite.Controllers
                         vm.Authentifie = true;
                         ViewBag.Connecter = "Bienvenue " + clients.Nom + " !!!";
                         _sessionTools.clientsWeb = clients;
+                        //_sessionTools.clientsWeb.
                        
                         if (clients.IsAdmin)
                         {
@@ -314,6 +315,15 @@ namespace TicketOnLine_webSite.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult Reservation2(ReservationWeb web)
+        {
+            web.IdClient = _sessionTools.clientsWeb.Id;
+            web.IdEvent = _sessionTools.eventWeb.Id;
+            web.PrixPlace = _sessionTools.eventWeb.Prix;
+            ServicesReservation.Post(web);
+            return RedirectToAction("index");
+        }
 
         public ActionResult GetDate(int id)
         {
@@ -322,7 +332,9 @@ namespace TicketOnLine_webSite.Controllers
 
         public ActionResult GetInfoReservation(int id)
         {
-            return View(ServicesEvent.GetInfoReservation(id).Result);
+            _sessionTools.eventWeb = ServicesEvent.Get(id).Result;
+            return View();
+            
         }
     }
 }

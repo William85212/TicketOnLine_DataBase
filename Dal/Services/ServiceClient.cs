@@ -74,6 +74,7 @@ namespace Dal.Services
                     {
                         l.Add(new Clients
                         {
+                            Id = (int)reader["Id"],
                             Nom = (string)reader["Nom"],
                             Prenom = (string)reader["Prenom"],
                             DateNaisance = (DateTime)reader["DateNaissance"],
@@ -102,6 +103,7 @@ namespace Dal.Services
                     {
                         return new Clients
                         {
+                            Id = (int)reader["Id"],
                             Nom = (string)reader["Nom"],
                             Prenom = (string)reader["Prenom"],
                             DateNaisance = (DateTime)reader["DateNaissance"],
