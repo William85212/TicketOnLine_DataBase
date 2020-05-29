@@ -15,11 +15,9 @@
             <p>Prix : @Model.Prix</p>
 
 
-            @Html.ActionLink("reservation", "GetInfoReservation", "Home", new { id = Model.Id })
+            @*@Html.ActionLink("reservation", "GetInfoReservation", "Home", new { id = Model.Id })*@
 
-            <a asp-controller="Home" asp-action="GetInfoReservation" asp-route-id="@Model.Id">
-                <button class="btn order-button" asp-action="Index" asp-controller="Home">reservation</button>
-            </a>
+            <a asp-controller="Home" asp-action="GetInfoReservation" asp-route-id="@Model.Id" class="btn btn-danger btn">Réservation</a>
         </div>
     </div>  
     <div class="row">

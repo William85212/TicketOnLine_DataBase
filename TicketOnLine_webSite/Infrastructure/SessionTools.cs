@@ -8,7 +8,7 @@ using TicketOnLine_webSite.Models;
 
 namespace TicketOnLine_webSite.Infrastructure
 {
-    public class SessionTools : ISessionTools
+    public class SessionTools :ISessionTools
     //ISessionTools
     {
 
@@ -88,19 +88,58 @@ namespace TicketOnLine_webSite.Infrastructure
 
         //pour Stocker la liste des Billets Reserver
 
-        //public List<ReservationWeb> Reservation
-        //{
-        //    get
-        //    {
+        public List<ReservationWeb> Reservation
+        {
+            get
+            {
+                if (Session.GetString(nameof(Reservation)) is null)
+                    Reservation = new List<ReservationWeb>();
+                return JsonConvert.DeserializeObject<List<ReservationWeb>>(Session.GetString(nameof(Reservation)));
+            }
+            private set
+            {
+                Session.SetString(nameof(Reservation), JsonConvert.SerializeObject(value));
+            }
+        }
 
-        //    }
-        //    private set
-        //    {
+        public void AddReservation(ReservationWeb reservation)
+        {
+            List<ReservationWeb> resL = Reservation;
+            resL.Add(reservation);
+            reservation.Id = resL.Count;
+            Reservation = resL;
+        }
+        public void RemoveOneReservation(int id)
+        {
+            List<ReservationWeb> l = Reservation;
+            int i = 0;
+            while (l[i].Id != id)
+            {
+                i++;
 
-        //    }
-        //}
-
-        public void AddResevation(ReservationWeb reservation)
+            }
+            if (l[i].Id == id)
+            {
+                l[i].NbrPlace--;
+            }
+            Reservation = l;
+        }
+        public void AddOneReservation(int id)
+        {
+            List<ReservationWeb> l = Reservation;
+            int i = 0;
+            while( l[i].Id != id)
+            {
+                i++;
+                
+            }
+            if (l[i].Id == id)
+            {
+                l[i].NbrPlace++;
+            }
+            Reservation = l;
+        }
+        public void RemoveAllReservation()
         {
 
         }

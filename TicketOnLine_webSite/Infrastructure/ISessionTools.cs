@@ -1,4 +1,5 @@
-﻿using TicketOnLine_webSite.Models;
+﻿using System.Collections.Generic;
+using TicketOnLine_webSite.Models;
 
 namespace TicketOnLine_webSite.Infrastructure
 {
@@ -9,8 +10,11 @@ namespace TicketOnLine_webSite.Infrastructure
         bool IsAdmin { get; set; }
         bool IsAuth { get; set; }
         public string Message { get; set; }
-
+        List<ReservationWeb> Reservation { get; }
         void Abandon();
-        void AddResevation(ReservationWeb reservation);
+        void AddReservation(ReservationWeb web);
+        void RemoveOneReservation(int id);
+        void AddOneReservation(int id);
+        void RemoveAllReservation();
     }
 }

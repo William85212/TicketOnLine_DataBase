@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Diagnostics;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using TicketOnLine_webSite.Infrastructure;
 using TicketOnLine_webSite.Models;
@@ -321,10 +322,12 @@ namespace TicketOnLine_webSite.Controllers
             web.IdClient = _sessionTools.clientsWeb.Id;
             web.IdEvent = _sessionTools.eventWeb.Id;
             web.PrixPlace = _sessionTools.eventWeb.Prix;
-            ServicesReservation.Post(web);
-            return RedirectToAction("index");
+            //ServicesReservation.Post(web);  pas d' enregistrement en db mtn ajout au panier et 
+            _sessionTools.AddReservation(web);
+            // return RedirectToAction("index");
+            return View("ContinuerAchat");
         }
-
+       
         public ActionResult GetDate(int id)
         {
             return View(ServicesEvent.GetDate(id).Result);
@@ -333,8 +336,75 @@ namespace TicketOnLine_webSite.Controllers
         public ActionResult GetInfoReservation(int id)
         {
             _sessionTools.eventWeb = ServicesEvent.Get(id).Result;
+
+            List<infoReservationWeb> d = ServicesEvent.GetInfoReservation(id).Result;
+
+            List<SelectListItem> selectList = new List<SelectListItem>();
+
+
+            foreach (var item in d)
+            {
+                selectList.Add(new SelectListItem { Value = item.DateRepresentetion.ToString(), Text = item.DateRepresentetion.ToString() });
+            }
+
+            ViewBag.Select = selectList;
             return View();
             
+        }
+
+        public ActionResult GetInfoReservation2(int id)
+        {
+            _sessionTools.eventWeb = ServicesEvent.Get(id).Result;
+
+            List<infoReservationWeb> d = ServicesEvent.GetInfoReservation(id).Result;
+
+            List<SelectListItem> selectList = new List<SelectListItem>();
+
+
+            foreach (var item in d)
+            {
+                selectList.Add(new SelectListItem { Value = item.DateRepresentetion.ToString(), Text = item.DateRepresentetion.ToString() });
+            }
+
+            ViewBag.Select = selectList;
+            return View();
+
+        }
+
+
+        public ActionResult Panier()
+        {
+            return View(_sessionTools.Reservation);
+        }
+
+        public ActionResult ContinuerAchat()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ContinuerAchat(ContinuerAchat continuerAchat )
+        {
+            if (continuerAchat.go == true)
+            {
+                return RedirectToAction("AllEvent");
+            }
+            else return RedirectToAction("FinalisationReservation");
+        }
+
+
+        public ActionResult FinalisationReservation()
+        {
+            return View();
+        }
+        public ActionResult AddOneReservation(ReservationWeb web)
+        {
+            _sessionTools.AddOneReservation(web.Id);
+            return RedirectToAction("Panier");
+        }
+        public ActionResult RemoveOneReservation(ReservationWeb web)
+        {
+            _sessionTools.RemoveOneReservation(web.Id);
+            return RedirectToAction("Panier");
         }
     }
 }

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<TicketOnLine_webSite.Models.ReservationWeb>
+
+@{
+    ViewData["Title"] = "Panier";
+}
+
+<h1>Panier</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NbrPlace)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdClient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdEvent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrixPlace)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NbrPlace)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdClient)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEvent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrixPlace)
+            </td>
+            <td>
+                <a class="btn btn-success" asp-action="AddOneReservation" asp-route-id="@item.Id">+</a>
+                <a class="btn btn-outline-warning" asp-action="RemoveOneReservation" asp-route-id="@item.Id">-</a>
+                <a class="btn btn-danger" asp-action="RemoveAll" asp-route-id="@item.Id">x</a>
+
+                @*@Html.ActionLink("AddOne", "AddOneReservation", "Home", new { id = item.Id })*@
+                @*
+        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+            </td>
+</tr>
+}
+        
+    </tbody>
+</table>
+<p>Rendre le button visible seulement si le panier contient un élément</p>
+<a class="btn btn-danger" asp-controller="Home" asp-action="FinalisationReservation">Validation panier</a>
