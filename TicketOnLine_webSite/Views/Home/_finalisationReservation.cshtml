@@ -1,0 +1,48 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+
+<style>
+
+
+    #orderProcess {
+        list-style: none;
+        padding: 0;
+        clear: both;
+    }
+
+        #orderProcess li {
+            color: #696969;
+            display: inline;
+            font-size: 1.2em;
+            margin-right: 15px;
+            padding: 3px 0px 0px 5px;
+        }
+
+    .step-number {
+        background-color: #edece8;
+        border: 1px solid #e6e4d9;
+        font-size: 1.5em;
+        margin-right: 5px;
+        padding: 3px 10px;
+    }
+
+    .current .step-number {
+        background-color: #a52f09;
+        border-color: #712107;
+        color: #fefefe;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <ol id="orderProcess">
+                <li><span class="step-number">1</span>Coordonée</li>
+                <li class="current"><span class="step-number">2</span>Reservation</li>
+                <li><span class="step-number">3</span>Validation</li>
+            </ol>
+        </div>
+    </div>
+</div>

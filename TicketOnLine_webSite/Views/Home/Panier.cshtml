@@ -10,19 +10,15 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
+                Date de l'événement
+                @*@Html.DisplayNameFor(model => model.Date)*@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NbrPlace)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdClient)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdEvent)
+                @*@Html.DisplayNameFor(model => model.IdEvent)*@
+                <p>nom de l'evenement</p>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PrixPlace)
@@ -34,16 +30,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NbrPlace)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdClient)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdEvent)
@@ -68,4 +58,4 @@
     </tbody>
 </table>
 <p>Rendre le button visible seulement si le panier contient un élément</p>
-<a class="btn btn-danger" asp-controller="Home" asp-action="FinalisationReservation">Validation panier</a>
+<a class="btn btn-danger" asp-controller="Home" asp-action="FinalisationReservation1">Validation panier</a>

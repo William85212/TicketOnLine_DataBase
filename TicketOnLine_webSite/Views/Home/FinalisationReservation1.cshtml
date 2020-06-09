@@ -1,0 +1,35 @@
+﻿
+<style>
+    th{
+        background-color: lightsteelblue;
+    }
+</style>
+
+<div class="container border">
+    @Html.Partial("_finalisationReservation")
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Date de Naissance</th>
+                    <th>Adresse de Facturation</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@ViewBag.client.Nom</td>
+                    <td>@ViewBag.client.Prenom</td>
+                    <td>@ViewBag.client.DateNaisance</td>
+                    <td>@ViewBag.client.Adresse</td>
+                    <td>@ViewBag.client.Email</td>
+                </tr>
+            </tbody>
+
+        </table>
+
+        <a class="btn btn-primary" asp-action="FinalisationReservation2">Next=></a>
+    </div>
+</div>

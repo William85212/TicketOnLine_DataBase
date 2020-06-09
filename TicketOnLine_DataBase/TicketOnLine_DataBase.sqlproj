@@ -64,7 +64,6 @@
     <Build Include="Tables\Reservation.sql" />
     <Build Include="Tables\Commentaire.sql" />
     <Build Include="Tables\Event.sql" />
-    <Build Include="Tables\Paiement.sql" />
     <Build Include="Tables\DateEvent.sql" />
   </ItemGroup>
   <ItemGroup>

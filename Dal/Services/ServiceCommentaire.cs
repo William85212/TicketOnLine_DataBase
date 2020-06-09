@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Dal.Services
 {
-    class ServiceCommentaire : Irepo<Commentaire>
+    public class ServiceCommentaire : Irepo<Commentaire>
     {
         private static ServiceCommentaire _instance;
         public static ServiceCommentaire Istance
@@ -34,7 +34,25 @@ namespace Dal.Services
 
         public IEnumerable<Commentaire> GetAll()
         {
-            throw new NotImplementedException();
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                cmd.CommandText = "Select * from Commentaire";
+                List<Commentaire> c = new List<Commentaire>();
+                using(SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        c.Add(new Commentaire
+                        {
+                            Id =  (int)reader["Id"],
+                            Commentaires =  (string)reader["Commentaire"],
+                            IdClient =  (int)reader["IdClient"],
+                            IdEvent =  (int)reader["IdEvent"]
+                        });
+                    }
+                    return c; 
+                }
+            }
         }
 
         public int Create(Commentaire c)

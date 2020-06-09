@@ -1,0 +1,38 @@
+﻿
+<style>
+    th {
+        background-color: lightsteelblue;
+    }
+</style>
+
+<div class="container border">
+    @Html.Partial("_finalisationReservation")
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date de Réservation</th>
+                    <th>Nombre de Place</th>
+                    <th>Prix par Place</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.reservation)
+                {
+                    <tr>
+                        <td>@item.Date</td>
+                        <td>@item.NbrPlace</td>
+                        <td>@item.PrixPlace</td>
+                    </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+        <a class="btn btn-primary" asp-action="Panier">Modifier</a>
+        <a class="btn btn-primary" asp-action="FinalisationReservation3">Next
+        </a>
+    </div>
+</div>
+

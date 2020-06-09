@@ -40,49 +40,117 @@ namespace TicketOnLine_webSite.Controllers
         }
         [HttpPost]
         public ActionResult Index(ClientsViewModel vm)
-         {
+        {
             ClientsWeb clients = (from c in ServicesClient.Get().Result
                                   where c.Email.Equals(vm.Clients.Email)
                                   select c).FirstOrDefault();
             if (ModelState.IsValid)
             {
-                
-                    if (clients is null)
+
+                if (clients is null)
+                {
+                    ViewBag.ErrorInscription = "Veuillez vous inscrire avant de vous connecter!!";
+                    return View(vm);
+                }
+
+                #region Hasc
+
+                string MdpH = _mdp.HashMdp(vm.Clients.Password);
+                #endregion
+                if (MdpH != clients.Password)
+                {
+                    ViewBag.ErrorMdp = "Mot de passe invalide!!";
+                    return View(vm);
+                }
+                else
+                {
+                    vm.Authentifie = true;
+                    ViewBag.Connecter = "Bienvenue " + clients.Nom + " !!!";
+                    _sessionTools.clientsWeb = clients;
+                    //_sessionTools.clientsWeb.
+
+                    if (clients.IsAdmin)
                     {
-                        ViewBag.ErrorInscription = "Veuillez vous inscrire avant de vous connecter!!";
-                        return View(vm);
+                        _sessionTools.IsAdmin = true;
                     }
 
-                    #region Hasc
-                    
-                    string MdpH = _mdp.HashMdp(vm.Clients.Password);
-                    #endregion
-                    if (MdpH != clients.Password)
-                    {
-                        ViewBag.ErrorMdp = "Mot de passe invalide!!";
-                        return View(vm);
-                    }
-                    else
-                    {
-                        vm.Authentifie = true;
-                        ViewBag.Connecter = "Bienvenue " + clients.Nom + " !!!";
-                        _sessionTools.clientsWeb = clients;
-                        //_sessionTools.clientsWeb.
-                       
-                        if (clients.IsAdmin)
-                        {
-                            _sessionTools.IsAdmin = true;
-                        }
+                    return RedirectToAction("Index");
 
-                        return RedirectToAction("Index");
-                        
 
-                    }
-                
-                
-                
+                }
+
+
+
             }
             return View(vm);
+        }
+
+        #region Connection anciennement index
+        public ActionResult Connection()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Connection(ClientsViewModel vm)
+        {
+            ClientsWeb clients = (from c in ServicesClient.Get().Result
+                                  where c.Email.Equals(vm.Clients.Email)
+                                  select c).FirstOrDefault();
+            if (ModelState.IsValid)
+            {
+
+                if (clients is null)
+                {
+                    ViewBag.ErrorInscription = "Veuillez vous inscrire avant de vous connecter!!";
+                    return View(vm);
+                }
+
+                #region Hasc
+
+                string MdpH = _mdp.HashMdp(vm.Clients.Password);
+                #endregion
+                if (MdpH != clients.Password)
+                {
+                    ViewBag.ErrorMdp = "Mot de passe invalide!!";
+                    return View(vm);
+                }
+                else
+                {
+                    vm.Authentifie = true;
+                    ViewBag.Connecter = "Bienvenue " + clients.Nom + " !!!";
+                    _sessionTools.clientsWeb = clients;
+                    //_sessionTools.clientsWeb.
+
+                    if (clients.IsAdmin)
+                    {
+                        _sessionTools.IsAdmin = true;
+                    }
+
+                    return RedirectToAction("Index");
+
+
+                }
+
+
+
+            }
+            return View(vm);
+        }
+
+
+        #endregion
+
+        public ActionResult Index2()
+        
+        {
+            List<EventWeb> l = ServicesEvent.Get().Result;
+            int count = l.Count;
+            List<EventWeb> nouveaute = new List<EventWeb>();
+            for (int i = l.Count; i > l.Count-4; i--)
+            {
+                nouveaute.Add(l[i-1]);
+            }
+            return View(nouveaute);
         }
 
         public IActionResult Privacy()
@@ -174,8 +242,6 @@ namespace TicketOnLine_webSite.Controllers
 
         #endregion
 
-
-
         #region Event 
         
         public ActionResult GetEvent(int id)
@@ -202,7 +268,19 @@ namespace TicketOnLine_webSite.Controllers
 
         [AccesAttribute]
         public ActionResult DetailsEvent2(int id)   //test : mise en place de la vue de detail avec html float!!
-        {
+        {      
+            List<CommentaireWeb> l =  ServicesCommentaire.Get().Result;
+            List<CommentaireWeb> lv = new List<CommentaireWeb>();
+
+            foreach (CommentaireWeb item in l)
+            {
+                if (item.IdEvent == id)
+                {
+                    lv.Add(item);
+                }
+            }
+
+            ViewBag.ListeMsg = lv;
             return View(ServicesEvent.Get(id).Result);
         }
 
@@ -319,13 +397,18 @@ namespace TicketOnLine_webSite.Controllers
         [HttpPost]
         public ActionResult Reservation2(ReservationWeb web)
         {
-            web.IdClient = _sessionTools.clientsWeb.Id;
-            web.IdEvent = _sessionTools.eventWeb.Id;
-            web.PrixPlace = _sessionTools.eventWeb.Prix;
-            //ServicesReservation.Post(web);  pas d' enregistrement en db mtn ajout au panier et 
-            _sessionTools.AddReservation(web);
-            // return RedirectToAction("index");
-            return View("ContinuerAchat");
+            if (ModelState.IsValid)
+            {
+                web.IdClient = _sessionTools.clientsWeb.Id;
+                web.IdEvent = _sessionTools.eventWeb.Id;
+                web.PrixPlace = _sessionTools.eventWeb.Prix;
+                //ServicesReservation.Post(web);  pas d' enregistrement en db mtn ajout au panier et 
+                _sessionTools.AddReservation(web);
+                // return RedirectToAction("index");
+                return View("ContinuerAchat2");
+            }
+            else return View(web);
+            
         }
        
         public ActionResult GetDate(int id)
@@ -376,6 +459,10 @@ namespace TicketOnLine_webSite.Controllers
         {
             return View(_sessionTools.Reservation);
         }
+        public ActionResult Panier2()
+        {
+            return View(_sessionTools.Reservation);
+        }
 
         public ActionResult ContinuerAchat()
         {
@@ -391,11 +478,42 @@ namespace TicketOnLine_webSite.Controllers
             else return RedirectToAction("FinalisationReservation");
         }
 
-
-        public ActionResult FinalisationReservation()
+        public ActionResult ContinuerAchat2()
         {
             return View();
         }
+
+
+
+
+
+
+        #region test propgressBar
+        public ActionResult _finalisationReservation()      //vue a ajouter en vue pattielle par la suite
+        {
+            return View();
+        }
+
+        public ActionResult FinalisationReservation1()
+        {
+            ViewBag.client = _sessionTools.clientsWeb;
+            return View();
+        }
+        public ActionResult FinalisationReservation2()
+        {
+            ViewBag.reservation = _sessionTools.Reservation;
+            return View();
+        }
+        public ActionResult _FinalisationReservation3()
+        {
+            return View(new ReservationWeb());
+        }
+        #endregion
+
+
+
+
+        #region AddOneReservation RemoveOneReservation DeleteAllReservation
         public ActionResult AddOneReservation(ReservationWeb web)
         {
             _sessionTools.AddOneReservation(web.Id);
@@ -406,5 +524,6 @@ namespace TicketOnLine_webSite.Controllers
             _sessionTools.RemoveOneReservation(web.Id);
             return RedirectToAction("Panier");
         }
+        #endregion
     }
 }

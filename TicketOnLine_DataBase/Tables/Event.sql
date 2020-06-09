@@ -4,8 +4,7 @@
     [NomSpectacle] NVARCHAR(50) NOT NULL, 
     [Realisateur] NVARCHAR(50) NOT NULL, 
     [Description] NVARCHAR(MAX) NOT NULL, 
-    [Duree] TIME NOT NULL,  
-    [PlaceRestante] INT NOT NULL,  
+    [Duree] TIME NOT NULL,   
     [Image] nvarchar(50),
     [prix ] INT NOT NULL, 
 )

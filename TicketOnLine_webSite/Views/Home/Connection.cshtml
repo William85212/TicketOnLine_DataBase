@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewData["Title"] = "Connection";
+}
+
+<h1>Connection</h1>
+
+@using Microsoft.AspNetCore.Http
+@model TicketOnLine_webSite.ViewModel.ClientsViewModel
+
+
+
+@if (ViewData["IsLogged"] is null || !(bool)ViewData["IsLogged"])
+{
+    <div class="text-center">
+        <p>
+            Veuillez vous authentifier :
+        </p>
+        @using (Html.BeginForm())
+        {
+            <div>
+                @Html.LabelFor(m => m.Clients.Email)
+                @Html.TextBoxFor(m => m.Clients.Email)
+                @Html.ValidationMessageFor(m => m.Clients.Email)
+            </div>
+            <div>
+                @Html.LabelFor(m => m.Clients.Password)
+                @Html.PasswordFor(m => m.Clients.Password)
+                @Html.ValidationMessageFor(m => m.Clients.Password)
+            </div>
+            <input type="submit" value="Se connecter" />
+            <br />
+            @Html.ActionLink("Créer un compte", "Post")
+        }
+        <br />
+        <p style="color:red">@ViewBag.ErrorMdp</p>
+        <p style="color:red">@ViewBag.ErrorInscription</p>
+    </div>
+
+}
+
+
