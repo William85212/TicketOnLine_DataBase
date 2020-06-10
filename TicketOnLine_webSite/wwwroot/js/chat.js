@@ -20,10 +20,11 @@ connection.start().then(function () {
 });
 
 document.getElementById("sendButton").addEventListener("click", function (event) {
-    var user =  _session/*document.getElementById("userInput").value;*/ //le user doit etre egal a ma variable de session
+    var user =  document.getElementById("userInput").value;       
     var message = document.getElementById("messageInput").value;
-    connection.invoke("SendMessage", user, message).catch(function (err) {  //invoquer la methode pour enregistrer un message creer dans le ChatHub
+    connection.invoke("SendMessage", user, message).catch(function (err) {  //invoke la methode pour enregistrer un message 
         return console.error(err.toString());
     });
     event.preventDefault();
+    //connection.invoke("SaveDb", message)
 });

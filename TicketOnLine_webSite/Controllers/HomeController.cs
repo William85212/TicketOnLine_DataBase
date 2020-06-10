@@ -40,7 +40,7 @@ namespace TicketOnLine_webSite.Controllers
         }
         [HttpPost]
         public ActionResult Index(ClientsViewModel vm)
-        {
+         {
             ClientsWeb clients = (from c in ServicesClient.Get().Result
                                   where c.Email.Equals(vm.Clients.Email)
                                   select c).FirstOrDefault();
@@ -455,14 +455,11 @@ namespace TicketOnLine_webSite.Controllers
         }
 
 
-        public ActionResult Panier()
-        {
-            return View(_sessionTools.Reservation);
-        }
-        public ActionResult Panier2()
-        {
-            return View(_sessionTools.Reservation);
-        }
+        
+        //public ActionResult Panier2()      (SAR)
+        //{
+        //    return View(_sessionTools.Reservation);
+        //}
 
         public ActionResult ContinuerAchat()
         {
@@ -504,16 +501,29 @@ namespace TicketOnLine_webSite.Controllers
             ViewBag.reservation = _sessionTools.Reservation;
             return View();
         }
-        public ActionResult _FinalisationReservation3()
+        public ActionResult FinalisationReservation3()
         {
-            return View(new ReservationWeb());
+            ViewBag.client = _sessionTools.clientsWeb;
+            ViewBag.reservation = _sessionTools.Reservation;
+            
+            return View();
         }
+        //[HttpPost]
+        //public ActionResult FinalisationReservation3()
+        //{
+        //    return View(new ReservationWeb());
+        //}
         #endregion
 
 
 
 
-        #region AddOneReservation RemoveOneReservation DeleteAllReservation
+        #region Panier AddOneReservation RemoveOneReservation DeleteAllReservation
+        public ActionResult Panier()
+        {
+            ViewBag.liste = _sessionTools.Reservation;
+            return View(_sessionTools.Reservation);
+        }
         public ActionResult AddOneReservation(ReservationWeb web)
         {
             _sessionTools.AddOneReservation(web.Id);
@@ -522,6 +532,12 @@ namespace TicketOnLine_webSite.Controllers
         public ActionResult RemoveOneReservation(ReservationWeb web)
         {
             _sessionTools.RemoveOneReservation(web.Id);
+            return RedirectToAction("Panier");
+        }
+
+        public ActionResult RemoveAll()
+        {
+            _sessionTools.RemoveAllReservation();
             return RedirectToAction("Panier");
         }
         #endregion

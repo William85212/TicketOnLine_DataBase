@@ -12,7 +12,7 @@ namespace TicketOnLine_webSite.Infrastructure
     //ISessionTools
     {
 
-        //
+        //injectione del dependencia
         private ISession Session { get; }
 
         public SessionTools(IHttpContextAccessor httpContextAccessor)
@@ -88,7 +88,7 @@ namespace TicketOnLine_webSite.Infrastructure
 
         //pour Stocker la liste des Billets Reserver
 
-        public List<ReservationWeb> Reservation
+        public List<ReservationWeb> Reservation   //Panier
         {
             get
             {
@@ -141,7 +141,7 @@ namespace TicketOnLine_webSite.Infrastructure
         }
         public void RemoveAllReservation()
         {
-
+            Reservation = new List<ReservationWeb>();
         }
 
         public void Abandon()

@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewData["Title"] = "FinalisationReservation3";
+}
+
+    <style>
+        th {
+            background-color: lightsteelblue;
+        }
+    </style>
+
+
+    <div class="container border">
+        @Html.Partial("_finalisationReservation")
+        <div class="row">
+            <h5>Réservation numéro : </h5>
+        </div>
+        <div class="row">
+            <h5>Coordonée :</h5>
+
+            <p>@ViewBag.client.Nom @ViewBag.client.Prenom</p>
+        </div>
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nom du Spectacle</th>
+                            <th>Quantité</th>
+                            <th>Prix/Place</th>
+                            <th>Sous total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int cpt = 0;
+                            @foreach (ReservationWeb item in ViewBag.reservation)
+                            {
+                                <tr>
+                                    <td>@TicketOnLine_webSite.Services.ServicesEvent.Get(item.Id).Result.NomSpectacle</td>
+                                    <td>@item.NbrPlace</td>
+                                    <td>@item.PrixPlace</td>
+                                    <td>@(@item.PrixPlace * @item.NbrPlace)</td>
+                                    <td style="display:none;"> @(cpt =  cpt + (item.PrixPlace * item.NbrPlace))</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <th>total : @cpt</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <p style="background-color: aliceblue"><h5>Adresse</h5>@ViewBag.client.Adresse</p>
+            </div>
+            <div class="col-sm-6">
+                <p style="background-color:aqua">moyen de paiements</p>
+            </div>
+        </div>
+    </div> 
+    <a class="btn btn-danger" asp-action="Paiement" style="float:right">Valider</a>
+

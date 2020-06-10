@@ -12,8 +12,9 @@
         //blabla
         <div class="col-sm-6">
             <div class="SalleInfo">
-                <h3>@item.Nom</h3>
-                <a asp-controller="Home" asp-action="GetEnventByIdSalle" asp-route-id="@item.Id" title="?">
+                
+                <a asp-controller="Home" asp-action="GetEnventByIdSalle" asp-route-id="@item.Id" title="@item.Nom">
+                    <h3>@item.Nom</h3>
                     <img class="product-image img-fluid img-thumbnail" src="~/Images/Image/@item.Image" alt="Image of @item.Nom" />
                 </a>
             </div>
