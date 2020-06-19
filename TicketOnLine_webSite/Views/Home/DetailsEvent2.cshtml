@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "DetailsEvent2";
 }
+@using TicketOnLine_webSite.Services
 
     <div class="row">
         <div class="col-sm-6">
@@ -28,8 +29,8 @@
             <div class="container">
                 <div class="row">&nbsp;</div>
                 <div class="row">
-                    <div class="col-2">User</div>
-                    <div class="col-4"><input type="text" id="userInput" /></div>
+                    @*<div class="col-2">User</div>*@
+                    <div class="col-4"><input type="hidden" id="userInput" value="@ViewBag.prenom" /></div>
                 </div>
                 <div class="row">
                     <div class="col-2">Message</div>
@@ -52,7 +53,7 @@
                     <ul id="messagesList">
                         @foreach (CommentaireWeb item in ViewBag.ListeMsg)
                         {
-                            <li>@item.Commentaires</li>
+                            <li><span style="color:blue">@ServicesClient.Get(item.Id).Result.Prenom </span>: @item.Commentaires <a asp-action="Love">&lt;3</a> <a asp-action="NoLove">&gt;3</a></li>
                         }
                     </ul>
                 </div>

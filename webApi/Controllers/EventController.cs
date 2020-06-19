@@ -26,7 +26,7 @@ namespace webApi.Controllers
         //[Route("api/Event/{id:int}")]
         [HttpGet("{id}")]
         public EvenementApi Get(int id)
-        {
+       {
             return service.GetById(id);
         }
 
@@ -46,8 +46,8 @@ namespace webApi.Controllers
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
-        [HttpDelete]
-        // [Route("api/client/{id:int}")]
+        [HttpDelete("Delete/{id:int}")]
+        // [Route("api/Event/{id:int}")]
         public void Delete(int id)
         {
             service.Delete(id);

@@ -26,6 +26,7 @@ namespace webApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddCors();  //ligne a ajouter pour la consamation de l api par angular
             //#region ajout des services pour les sessions
             ////-----va permettre de stocker en cache les variables de sessions
             //services.AddDistributedMemoryCache();
@@ -53,6 +54,7 @@ namespace webApi
 
             //app.UseSession();
 
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); //ligne a ajouter pout la consomation de l api au travers d angular
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -15,7 +15,7 @@ namespace TicketOnLine_webSite.Hubs
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
 
-        public static void SaveDb(string Message)
+        public static async  void SaveDb(string Message)
         {
             CommentaireWeb web = new CommentaireWeb
             {

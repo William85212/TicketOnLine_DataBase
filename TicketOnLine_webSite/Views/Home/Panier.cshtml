@@ -21,6 +21,9 @@
                         @*@Html.DisplayNameFor(model => model.Date)*@
                     </th>
                     <th>
+                        Lieux
+                    </th>
+                    <th>
                         @Html.DisplayNameFor(model => model.NbrPlace)
                     </th>
                     <th>
@@ -39,6 +42,9 @@
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @*@TicketOnLine_webSite.Services.ServicesSalle.Get(item.IdEvent).Result.Lieux*@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.NbrPlace)

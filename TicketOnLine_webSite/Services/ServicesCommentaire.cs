@@ -22,6 +22,17 @@ namespace TicketOnLine_webSite.Services
             return JsonConvert.DeserializeObject<List<CommentaireWeb>>(json);
         }
 
+        public static async Task<CommentaireWeb> Get(int id)
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:44399/api/");
+
+            HttpResponseMessage message = await client.GetAsync("Commentaire/" + id);
+            string json = message.Content.ReadAsStringAsync().Result;
+
+            return JsonConvert.DeserializeObject<CommentaireWeb>(json);
+        }
+
         public static async void Post(CommentaireWeb web)
         {
             HttpClient client = new HttpClient();

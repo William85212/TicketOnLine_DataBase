@@ -267,7 +267,7 @@ namespace TicketOnLine_webSite.Controllers
         }
 
         [AccesAttribute]
-        public ActionResult DetailsEvent2(int id)   //test : mise en place de la vue de detail avec html float!!
+        public ActionResult DetailsEvent2(int id)  
         {      
             List<CommentaireWeb> l =  ServicesCommentaire.Get().Result;
             List<CommentaireWeb> lv = new List<CommentaireWeb>();
@@ -279,7 +279,7 @@ namespace TicketOnLine_webSite.Controllers
                     lv.Add(item);
                 }
             }
-
+            ViewBag.prenom = _sessionTools.clientsWeb.Prenom;
             ViewBag.ListeMsg = lv;
             return View(ServicesEvent.Get(id).Result);
         }
@@ -508,11 +508,20 @@ namespace TicketOnLine_webSite.Controllers
             
             return View();
         }
-        //[HttpPost]
-        //public ActionResult FinalisationReservation3()
-        //{
-        //    return View(new ReservationWeb());
-        //}
+        [HttpPost]
+        public ActionResult FinalisationReservation3b(Info info)
+        {
+            if (info.MoyenDePaiement == "Ing")
+            {
+               return  Redirect("https://www.ing.be/fr/retail");
+            }
+            if (info.MoyenDePaiement == "Fortis")
+            {
+                return Redirect("https://www.bnpparibasfortis.be/");
+            }
+            else
+                return Redirect("https://www.belfius.be/");
+        }
         #endregion
 
 

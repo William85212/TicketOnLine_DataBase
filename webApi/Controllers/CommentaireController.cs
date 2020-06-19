@@ -21,11 +21,22 @@ namespace webApi.Controllers
         {
             return service.GetAll();
         }
+        [HttpGet("{id}")]
+        public CommentaireApi Get(int id)
+        {
+            return service.GetById(id);
+        }
+
         [HttpPost]
         public HttpResponseMessage Post(CommentaireApi comApi)
         {
             service.Create(comApi);
             return new HttpResponseMessage(HttpStatusCode.Created);
+        }
+        [HttpDelete("Delete/{id:int}")]
+        public void Delete(int id)
+        {
+            service.Delete(id);
         }
     }
 }

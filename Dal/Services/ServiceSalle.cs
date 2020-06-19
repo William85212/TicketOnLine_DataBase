@@ -88,7 +88,7 @@ namespace Dal.Services
         {
             using(SqlCommand cmd = _connection.CreateCommand())
             {
-                _connection.Open();
+               // _connection.Open();
                 cmd.CommandText = "select * from Salles where Id = @id ";
                 cmd.Parameters.AddWithValue("Id", id);
                 using(SqlDataReader reader = cmd.ExecuteReader())
@@ -100,7 +100,7 @@ namespace Dal.Services
                             Id = (int)reader["Id"],
                             Nom = (reader["Nom"] is DBNull) ? null : (string)reader["Nom"],
                             Lieux = (string)reader["Lieux"],
-                            Capacite = (int)reader["Capacite"],
+                            Capacite = (int)reader["Capcite"],
                             Image = (reader["Image"] is DBNull) ? null : (string)reader["Image"]
                         };
                     }

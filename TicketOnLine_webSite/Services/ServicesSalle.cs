@@ -21,5 +21,16 @@ namespace TicketOnLine_webSite.Services
 
             return JsonConvert.DeserializeObject<List<SalleWeb>>(json);
         }
+
+        public static async Task<SalleWeb> Get(int id)
+        {
+            HttpClient clien = new HttpClient();
+            clien.BaseAddress = new Uri("https://localhost:44399/api/");
+
+            HttpResponseMessage message = await clien.GetAsync("Salle/"+id);
+            string json = message.Content.ReadAsStringAsync().Result;
+
+            return JsonConvert.DeserializeObject<SalleWeb>(json);
+        }
     }
 }

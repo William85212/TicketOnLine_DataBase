@@ -29,7 +29,25 @@ namespace Dal.Services
 
         public Commentaire GetById(int id)
         {
-            throw new NotImplementedException();
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                cmd.CommandText = "Select * from Commentaire where Id = @id";
+                cmd.Parameters.AddWithValue("id", id);
+                using(SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return new Commentaire
+                        {
+                            Id = (int)reader["Id"],
+                            Commentaires = (string)reader["Commentaire"],
+                            IdClient = (int)reader["IdClient"],
+                            IdEvent = (int)reader["IdEvent"]
+                        };
+                    }
+                    else return null;
+                }
+            }
         }
 
         public IEnumerable<Commentaire> GetAll()
@@ -70,7 +88,12 @@ namespace Dal.Services
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            using(SqlCommand cmd = _connection.CreateCommand())
+            {
+                cmd.CommandText = "delete from Commentaire where Id = @id";
+                cmd.Parameters.AddWithValue("id", id);
+                cmd.ExecuteNonQuery();
+            }
         }
 
         public void Update(Commentaire entity)

@@ -47,7 +47,7 @@ namespace Dal.Services
         {
             using(SqlCommand cmd = _connection.CreateCommand())
             {
-                cmd.CommandText = "insert into Event output inserted.Id values ( @NomSpectacle, @Relisateur, @Description, @Duree, @PlaceRestante, @IdSalle, @Image, @Prix)";
+                cmd.CommandText = "insert into Event output inserted.Id values ( @NomSpectacle, @Realisateur, @Description, @Duree, @PlaceRestante, @Image, @Prix)";
                 cmd.Parameters.AddWithValue("NomSpectacle", e.NomSpectacle);
                 cmd.Parameters.AddWithValue("Realisateur", e.Realisateur);
                 cmd.Parameters.AddWithValue("Description", e.Description);

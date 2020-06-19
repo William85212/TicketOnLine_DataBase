@@ -33,7 +33,7 @@ namespace webApi.Services
 
         public CommentaireApi GetById(int id)
         {
-            throw new NotImplementedException();
+            return service.GetById(id).toApi();
         }
 
         public IEnumerable<CommentaireApi> GetAll()
@@ -48,7 +48,7 @@ namespace webApi.Services
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            service.Delete(id);
         }
 
         public void Update(CommentaireApi entity)
