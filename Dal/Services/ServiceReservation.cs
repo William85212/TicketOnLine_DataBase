@@ -24,7 +24,7 @@ namespace Dal.Services
 
         protected ServiceReservation()
         {
-            _connection = new SqlConnection(@"Data Source=DESKTOP-DLBID37\SQL2019DEV;Initial Catalog=db3;Integrated Security=True");
+            _connection = new SqlConnection(@"Data Source=DESKTOP-DLBID37\SQL2019DEV;Initial Catalog=amelioration;Integrated Security=True");
             _connection.Open();
         }
 #endregion
@@ -38,7 +38,7 @@ namespace Dal.Services
                 cmd.Parameters.AddWithValue("NbrPlace", reservation.NbrPlace);
                 cmd.Parameters.AddWithValue("Idclient", reservation.IdClient);
                 cmd.Parameters.AddWithValue("IdEvent", reservation.IdEvent);
-                cmd.Parameters.AddWithValue("prixPlace", reservation.PrixPlace);
+                cmd.Parameters.AddWithValue("prixTotal", reservation.PrixTotal);
 
                 return (int)cmd.ExecuteScalar();
             }
@@ -60,7 +60,7 @@ namespace Dal.Services
                             NbrPlace =(int)reader["NbrPlace"],
                             IdClient = (int)reader["IdClient"],
                             IdEvent = (int)reader["IdEvent"],
-                            PrixPlace = (int)reader["prixPlace"]
+                            PrixTotal = (int)reader["prixTotal"]
                         };
                     }
                     else return null;
@@ -85,7 +85,7 @@ namespace Dal.Services
                             NbrPlace = (int)reader["NbrPlace"],
                             IdClient = (int)reader["IdClient"],
                             IdEvent = (int)reader["IdEvent"],
-                            PrixPlace = (int)reader["prixPlace"]
+                            PrixTotal = (int)reader["prixTotal"]
                         });
                     }
                     return rl;

@@ -31,7 +31,7 @@ namespace Dal.Services
         private SqlConnection _connection;
         protected ServiceClient()
         {
-            _connection = new SqlConnection(@"Data Source=DESKTOP-DLBID37\SQL2019DEV;Initial Catalog=db3;Integrated Security=True");
+            _connection = new SqlConnection(@"Data Source=DESKTOP-DLBID37\SQL2019DEV;Initial Catalog=amelioration;Integrated Security=True");
             _connection.Open();
         }
 

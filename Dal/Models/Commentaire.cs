@@ -8,6 +8,8 @@ namespace Dal.Models
     {
         public int Id { get; set; }
         public string Commentaires { get; set; }
+        public int Jaime { get; set; }
+        public int JaimePas { get; set; }
         public int IdClient { get; set; }
         public int IdEvent { get; set; }
 

@@ -35,7 +35,7 @@ namespace Dal.Services
 
         protected ServiceEvent()
         {
-            _connection = new SqlConnection(@"Data Source=DESKTOP-DLBID37\SQL2019DEV;Initial Catalog=db3;Integrated Security=True");
+            _connection = new SqlConnection(@"Data Source=DESKTOP-DLBID37\SQL2019DEV;Initial Catalog=amelioration;Integrated Security=True");
             _connection.Open();
         }
 
@@ -47,14 +47,12 @@ namespace Dal.Services
         {
             using(SqlCommand cmd = _connection.CreateCommand())
             {
-                cmd.CommandText = "insert into Event output inserted.Id values ( @NomSpectacle, @Realisateur, @Description, @Duree, @PlaceRestante, @Image, @Prix)";
+                cmd.CommandText = "insert into Event output inserted.Id values ( @NomSpectacle, @Realisateur, @Description, @Duree, @Image)";
                 cmd.Parameters.AddWithValue("NomSpectacle", e.NomSpectacle);
                 cmd.Parameters.AddWithValue("Realisateur", e.Realisateur);
                 cmd.Parameters.AddWithValue("Description", e.Description);
                 cmd.Parameters.AddWithValue("Duree",e.Duree);
-                cmd.Parameters.AddWithValue("PlaceRestante", e.PlaceRestante);
                 cmd.Parameters.AddWithValue("Image", e.Image);
-                cmd.Parameters.AddWithValue("Prix", e.Prix);
 
                 return (int)cmd.ExecuteScalar();
             }
@@ -94,9 +92,7 @@ namespace Dal.Services
                             NomSpectacle =(string)reader["NomSpectacle"],
                             Realisateur =(string)reader["Realisateur"],
                             Description =(string)reader["Description"],
-                            Duree =(TimeSpan)reader["Duree"],
-                            PlaceRestante =(int)reader["PlaceRestante"],
-                            Prix =(int)reader["prix "],
+                            Duree =(int)reader["Duree"],
                             Image = (reader["Image"] is DBNull)? null : (string)reader["Image"],
                         });
                     }
@@ -122,10 +118,8 @@ namespace Dal.Services
                             NomSpectacle = (string)reader["NomSpectacle"],
                             Realisateur = (string)reader["Realisateur"],
                             Description = (string)reader["Description"],
-                            Duree = (TimeSpan)reader["Duree"],
-                            PlaceRestante = (int)reader["PlaceRestante"],
+                            Duree = (int)reader["Duree"],
                             Image = (reader["Image"] is DBNull) ? null : (string)reader["Image"],
-                            Prix = (int)reader["prix "]
                         };
                     }
                     return null;
@@ -149,10 +143,8 @@ namespace Dal.Services
                             NomSpectacle = (string)reader["NomSpectacle"],
                             Realisateur = (string)reader["Ralisateur"],
                             Description = (string)reader["Description"],
-                            Duree = (TimeSpan)reader["Duree"],
-                            PlaceRestante = (int)reader["PlaceRestance"],
+                            Duree = (int)reader["Duree"],
                             Image = (reader["Image"] is DBNull) ? null : (string)reader["Image"],
-                            Prix = (int)reader["prix "]
                         };
                     }
                     return null;
@@ -167,12 +159,11 @@ namespace Dal.Services
         {
             using (SqlCommand cmd = _connection.CreateCommand())
             {
-                cmd.CommandText = "update Event NomSpectacle = @NomSpectacle, Realisateur = @Realisateur, Description = @Description , PlaceRestante = @PlaceRestante, IdSalle = @IdSalle, Image = @Image";
+                cmd.CommandText = "update Event NomSpectacle = @NomSpectacle, Realisateur = @Realisateur, Description = @Description , Duree = @Duree, Image = @Image";
                 cmd.Parameters.AddWithValue("NomSpectecle", e.NomSpectacle);
                 cmd.Parameters.AddWithValue("Realisateur", e.Realisateur);
                 cmd.Parameters.AddWithValue("Description", e.Description);
                 cmd.Parameters.AddWithValue("Duree", e.Duree);
-                cmd.Parameters.AddWithValue("PlaceRestante", e.PlaceRestante);
                 cmd.Parameters.AddWithValue("Image", e.Image);
 
 
@@ -247,10 +238,8 @@ namespace Dal.Services
                             NomSpectacle = (string)reader["NomSpectacle"],
                             Realisateur = (string)reader["Realisateur"],
                             Description = (string)reader["Description"],
-                            Duree = (TimeSpan)reader["Duree"],
-                            PlaceRestante = (int)reader["PlaceRestante"],
+                            Duree = (int)reader["Duree"],
                             Image = (reader["Image"] is DBNull) ? null : (string)reader["Image"],
-                            Prix = (int)reader["prix "]
                         });
                     }
                     return Le;

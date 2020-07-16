@@ -10,6 +10,8 @@ namespace Dal.Models
         public DateTime DateRepresentation { get; set; }
         public int IdSalle { get; set; }
         public int IdEvent { get; set; }
+        public int PlaceRestante { get; set; }
+        public int PrixPlace { get; set; }
     }
 }
 

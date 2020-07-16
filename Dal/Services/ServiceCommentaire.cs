@@ -23,7 +23,7 @@ namespace Dal.Services
 
         public ServiceCommentaire()
         {
-            _connection = new SqlConnection(@"Data Source=DESKTOP-DLBID37\SQL2019DEV;Initial Catalog=db3;Integrated Security=True");
+            _connection = new SqlConnection(@"Data Source=DESKTOP-DLBID37\SQL2019DEV;Initial Catalog=amelioration;Integrated Security=True");
             _connection.Open();
         }
 
@@ -41,8 +41,11 @@ namespace Dal.Services
                         {
                             Id = (int)reader["Id"],
                             Commentaires = (string)reader["Commentaire"],
+                            Jaime = (reader["Jaime"] is DBNull) ? 0 : (int)reader["Jaime"],
+                            JaimePas = (reader[""] is DBNull) ? 0 : (int)reader["JaimePas"],
                             IdClient = (int)reader["IdClient"],
                             IdEvent = (int)reader["IdEvent"]
+                            //Image = (reader["Image"] is DBNull) ? null : (string)reader["Image"],
                         };
                     }
                     else return null;
@@ -64,6 +67,8 @@ namespace Dal.Services
                         {
                             Id =  (int)reader["Id"],
                             Commentaires =  (string)reader["Commentaire"],
+                            Jaime = (int)reader["Jaime"],
+                            JaimePas = (int)reader["JaimePas"],
                             IdClient =  (int)reader["IdClient"],
                             IdEvent =  (int)reader["IdEvent"]
                         });
@@ -77,8 +82,10 @@ namespace Dal.Services
         {
             using (SqlCommand cmd = _connection.CreateCommand())
             {
-                cmd.CommandText = "insert into Commentaire output inserted.Id values (@Commentaire, @IdClient, @IdEvent)";
+                cmd.CommandText = "insert into Commentaire output inserted.Id values (@Commentaire, @Jaime, @JaimePas, @IdClient, @IdEvent)";
                 cmd.Parameters.AddWithValue("Commentaire", c.Commentaires);
+                cmd.Parameters.AddWithValue("Jaime", c.Jaime);
+                cmd.Parameters.AddWithValue("JaimePas", c.JaimePas);
                 cmd.Parameters.AddWithValue("IdClient", c.IdClient);
                 cmd.Parameters.AddWithValue("IdEvent", c.IdEvent);
 

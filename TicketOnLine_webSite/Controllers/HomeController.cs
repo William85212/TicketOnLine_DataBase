@@ -401,7 +401,6 @@ namespace TicketOnLine_webSite.Controllers
             {
                 web.IdClient = _sessionTools.clientsWeb.Id;
                 web.IdEvent = _sessionTools.eventWeb.Id;
-                web.PrixPlace = _sessionTools.eventWeb.Prix;
                 //ServicesReservation.Post(web);  pas d' enregistrement en db mtn ajout au panier et 
                 _sessionTools.AddReservation(web);
                 // return RedirectToAction("index");

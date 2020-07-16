@@ -39,9 +39,9 @@
                             <tr>
                                 <td>@TicketOnLine_webSite.Services.ServicesEvent.Get(item.Id).Result.NomSpectacle</td>
                                 <td>@item.NbrPlace</td>
-                                <td>@item.PrixPlace</td>
+                                @*<td>@item.PrixPlace</td>
                                 <td>@(@item.PrixPlace * @item.NbrPlace)</td>
-                                <td style="display:none;"> @(cpt =  cpt + (item.PrixPlace * item.NbrPlace))</td>
+                                <td style="display:none;"> @(cpt =  cpt + (item.PrixPlace * item.NbrPlace))</td>*@
                             </tr>
                         }
                     }

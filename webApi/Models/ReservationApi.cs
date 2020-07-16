@@ -12,6 +12,6 @@ namespace webApi.Models
         public int NbrPlace { get; set; }
         public int IdClient { get; set; }
         public int IdEvent { get; set; }
-        public int PrixPlace { get; set; }
+        public int PrixTotal { get; set; }
     }
 }

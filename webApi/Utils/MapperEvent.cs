@@ -18,10 +18,8 @@ namespace webApi.Utils
                 NomSpectacle = api.NomSpectacle,
                 Realisateur = api.Realisateur,
                 Description = api.Description,
-                Duree =new TimeSpan( api.Duree),
-                PlaceRestante = api.PlaceRestante,
-                Image = api.Image,
-                Prix = api.Prix
+                Duree = api.Duree,
+                Image = api.Image
             };
             return e;
         }
@@ -34,10 +32,8 @@ namespace webApi.Utils
                 NomSpectacle = e.NomSpectacle,
                 Realisateur = e.Realisateur,
                 Description = e.Description,
-                Duree = e.Duree.Ticks,
-                PlaceRestante = e.PlaceRestante,
+                Duree = e.Duree,
                 Image= e.Image, 
-                Prix = e.Prix
             };
             return a; 
         }

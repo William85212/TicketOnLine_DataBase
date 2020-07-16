@@ -17,7 +17,7 @@ namespace webApi.Utils
                 NbrPlace = r.NbrPlace,
                 IdClient = r.IdClient,
                 IdEvent = r.IdEvent,
-                PrixPlace = r.PrixPlace
+                PrixTotal = r.PrixTotal
             };
             return api;
         }
@@ -30,7 +30,7 @@ namespace webApi.Utils
                 NbrPlace = api.NbrPlace,
                 IdClient = api.IdClient,
                 IdEvent = api.IdEvent,
-                PrixPlace = api.PrixPlace
+                PrixTotal = api.PrixTotal
             };
             return r;
         }

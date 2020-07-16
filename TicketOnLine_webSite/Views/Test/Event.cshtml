@@ -27,12 +27,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Duree)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.PlaceRestante)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IdSalle)
-            </th>
+            </th>*@
             <th></th>
         </tr>
     </thead>
@@ -54,12 +54,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Duree)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.PlaceRestante)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdSalle)
-            </td>
+            </td>*@
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
